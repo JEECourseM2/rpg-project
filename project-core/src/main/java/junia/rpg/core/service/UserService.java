@@ -30,6 +30,6 @@ public class UserService{
 
     public List<User> findAll() { return  userDAO.findAll(); }
 
-    public List<User> findAllWithCharacters() { return  userDAO.findAllWithCharacters(); }
+    public List<User> findAllWithCharacterSheets() { return  userDAO.findAllWithCharacterSheets(); }
 
 }

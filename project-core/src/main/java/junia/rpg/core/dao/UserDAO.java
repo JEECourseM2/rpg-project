@@ -10,7 +10,7 @@ public interface UserDAO extends JpaRepository<User, Long> {
 
     public User findByName(String username);
 
-    @Query("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.characters")
-    public List<User> findAllWithCharacters();
+    @Query("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.characterSheets")
+    public List<User> findAllWithCharacterSheets();
 
 }

@@ -18,7 +18,7 @@ public class PartyController {
 
     @GetMapping(path = "/parties")
     public String getListOfParties(ModelMap model) {
-        model.addAttribute("parties", partyService.findAllWithCharacters());
+        model.addAttribute("parties", partyService.findAllWithCharacterSheets());
         return "partiesList";
     }
 }

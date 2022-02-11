@@ -1,11 +1,13 @@
 package junia.rpg.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties(value="characterSheets")
 public class User extends GenericEntity{
 
     private String name;
@@ -13,7 +15,7 @@ public class User extends GenericEntity{
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<Character> characters;
+    private List<CharacterSheet> characterSheets;
 
     public String getName() {
         return name;
@@ -31,12 +33,12 @@ public class User extends GenericEntity{
         this.password = password;
     }
 
-    public List<Character> getCharacters() {
-        return characters;
+    public List<CharacterSheet> getCharacterSheets() {
+        return characterSheets;
     }
 
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
+    public void setCharacterSheets(List<CharacterSheet> characterSheets) {
+        this.characterSheets = characterSheets;
     }
 
 }

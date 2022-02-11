@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping(path = "/users")
     public String getListOfUsers(ModelMap model) {
-        model.addAttribute("users", userService.findAllWithCharacters());
+        model.addAttribute("users", userService.findAllWithCharacterSheets());
         return "usersList";
     }
 }

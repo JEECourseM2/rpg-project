@@ -1,22 +1,19 @@
 package junia.rpg.core.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Character extends GenericEntity{
+public class CharacterSheet extends GenericEntity{
 
     private String name;
 
     private int level;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "party_id")
     private Party party;
 
 

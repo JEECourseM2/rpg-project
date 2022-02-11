@@ -80,13 +80,13 @@ INSERT INTO `party` VALUES (1,'2019-09-16 10:00:38', NULL, 'Les Fers de Hache', 
 UNLOCK TABLES;
 
 --
--- Table structure for table `character`
+-- Table structure for table `characterSheet`
 --
 
-DROP TABLE IF EXISTS `character`;
+DROP TABLE IF EXISTS `characterSheet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `character` (
+CREATE TABLE `characterSheet` (
   `id` bigint(20) NOT NULL,
   `creationDate` datetime DEFAULT NULL,
   `updateDate` datetime DEFAULT NULL,
@@ -101,16 +101,16 @@ CREATE TABLE `character` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `character`
+-- Dumping data for table `characterSheet`
 --
 
-LOCK TABLES `character` WRITE;
-/*!40000 ALTER TABLE `character` DISABLE KEYS */;
-INSERT INTO `character` VALUES (11, '2019-09-16 10:00:39', NULL, 'Auchan', 6, 8, 1),
+LOCK TABLES `characterSheet` WRITE;
+/*!40000 ALTER TABLE `characterSheet` DISABLE KEYS */;
+INSERT INTO `characterSheet` VALUES (11, '2019-09-16 10:00:39', NULL, 'Auchan', 6, 8, 1),
                                (12, '2019-09-16 10:00:39', NULL, 'Carrefour', 6, 10, 1),
                                (13, '2019-09-16 10:00:39', NULL, 'Walmart', 6, 1, 1),
                                (14, '2019-09-16 10:00:39', NULL, 'Philips', 7, 9, 1);
-/*!40000 ALTER TABLE `character` ENABLE KEYS */;
+/*!40000 ALTER TABLE `characterSheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

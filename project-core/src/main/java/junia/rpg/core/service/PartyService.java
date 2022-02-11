@@ -20,7 +20,7 @@ public class PartyService {
         return partyDAO.findByName(name);
     }
 
-    public List<Party> findAllWithCharacters() {
-        return partyDAO.findAllWithCharacters();
+    public List<Party> findAllWithCharacterSheets() {
+        return partyDAO.findAllWithCharacterSheets();
     }
 }

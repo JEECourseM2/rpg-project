@@ -10,7 +10,7 @@ public interface PartyDAO extends JpaRepository<Party, Long> {
 
     Party findByName(String name);
 
-    @Query("SELECT DISTINCT p FROM Party p LEFT JOIN FETCH p.characters")
-    List<Party> findAllWithCharacters();
+    @Query("SELECT DISTINCT p FROM Party p LEFT JOIN FETCH p.characterSheets")
+    List<Party> findAllWithCharacterSheets();
 
 }

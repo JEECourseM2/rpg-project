@@ -42,8 +42,8 @@
             <tr>
                 <td>$party.name</td>
                 <td>
-                    #foreach($character in $party.characters)
-                        Character : $character.name :
+                    #foreach($characterSheet in $party.characterSheets)
+                        Character : $characterSheet.name :
                        <br/>
                     #end
                 </td>
