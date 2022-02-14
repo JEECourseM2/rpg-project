@@ -3,6 +3,7 @@ package junia.rpg.core.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class Party extends GenericEntity{
 
     @OneToMany(mappedBy = "party")
     private List<CharacterSheet> characterSheets;
+
+    @ManyToOne
+    private User gmUser;
+
 
     public String getName() {
         return name;
@@ -31,4 +36,11 @@ public class Party extends GenericEntity{
         this.characterSheets = characterSheets;
     }
 
+    public User getGmUser() {
+        return gmUser;
+    }
+
+    public void setGmUser(User gm_user) {
+        this.gmUser = gm_user;
+    }
 }

@@ -27,4 +27,7 @@ public class PartyService {
     public List<Party> findAll() {
         return partyDAO.findAll();
     }
+
+    public List<Party> findUserPartiesWithCharacterSheetsAndUser(long userId) { return partyDAO.findUserPartiesWithCharacterSheetsAndUser(userId); }
+
 }
