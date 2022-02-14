@@ -23,4 +23,8 @@ public class PartyService {
     public List<Party> findAllWithCharacterSheets() {
         return partyDAO.findAllWithCharacterSheets();
     }
+
+    public List<Party> findAll() {
+        return partyDAO.findAll();
+    }
 }
