@@ -13,7 +13,12 @@ import javax.inject.Inject;
 public class LoginController {
 
     @GetMapping(value = "/login")
-    public String getListOfParties(ModelMap model) {
+    public String getLoginPage(ModelMap model) {
         return "loginForm";
+    }
+
+    @GetMapping(value = "/register")
+    public String getRegisterPage(ModelMap model) {
+        return "registerForm";
     }
 }

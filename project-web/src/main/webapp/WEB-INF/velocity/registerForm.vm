@@ -29,7 +29,7 @@
 
 <div class="container">
     <div>
-        <h1 class="text-center"><b>Log in</b></h1>
+        <h1 class="text-center"><b>Register</b></h1>
     </div>
     <hr style="border-top: 2px solid #8c8b8b;">
     <br>
@@ -37,19 +37,25 @@
         <form data-bitwarden-watching="1">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="text" class="form-control" id="inputUsernameLogIn">
+                <input class="form-control" id="inputUsernameRegister" type="text">
+                <div class="col-auto">
+                    <span id="passwordHelpInline" class="form-text">
+                      Must be 4-14 characters long.
+                    </span>
+                </div>
             </div>
+            <br>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPasswordLogIn">
+                <input class="form-control" id="inputPasswordRegister" type="password">
             </div>
-            <div>
-                <a href="">forgot password</a></div>
-            <div>
-                <a href="/project_web_war_exploded/web/register">register</a>
-            </div>
-            <div style="text-align: right;">
-                <button type="submit" class="btn btn-dark btn-sm">connect</button>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Confirm password</label>
+                <input class="form-control" id="inputPasswordRegister" type="password" aria-required="true" data-ok="false" data-com.bitwarden.browser.user-edited="yes">
+                <span class="error-msg" id="passwordConfirmErr"></span></div>
+            <div class="d-flex justify-content-between" style="text-align: right;">
+                <a href="/project_web_war_exploded/web/login" class="btn btn-secondary btn-sm" type="button">cancel</a>
+                <button class="btn btn-dark btn-sm" type="submit">connect</button>
             </div>
         </form>
     </div>
