@@ -63,8 +63,8 @@ CREATE TABLE `party` (
   `name` varchar(255) DEFAULT NULL,
   `sessionNumber` int(11) DEFAULT 0,
   `notes` varchar(255) DEFAULT NULL,
-  `gmUser` bigint(20) NOT NULL,
-  FOREIGN KEY (`gmUser`) REFERENCES `user` (`id`),
+  `gmUser_id` bigint(20) NOT NULL,
+  FOREIGN KEY (`gmUser_id`) REFERENCES `user` (`id`),
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
