@@ -4,10 +4,12 @@ import junia.rpg.core.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
 
 @Controller
+@RequestMapping("/web")
 public class UserController {
 
     private UserService userService;
@@ -17,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/users")
+    @GetMapping(value = "/users")
     public String getListOfUsers(ModelMap model) {
         model.addAttribute("users", userService.findAllWithCharacterSheets());
         return "usersList";
