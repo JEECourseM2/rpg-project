@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties(value="characterSheets")
+@JsonIgnoreProperties(value = { "characterSheets", "parties_asGM" })
 public class User extends GenericEntity{
 
     private String name;
@@ -16,6 +16,10 @@ public class User extends GenericEntity{
 
     @OneToMany(mappedBy = "user")
     private List<CharacterSheet> characterSheets;
+
+    @OneToMany(mappedBy = "gmUser")
+    private List<Party> partiesAsGM;
+
 
     public String getName() {
         return name;
@@ -41,4 +45,11 @@ public class User extends GenericEntity{
         this.characterSheets = characterSheets;
     }
 
+    public List<Party> getGm_partiesAsGM() {
+        return partiesAsGM;
+    }
+
+    public void setGm_partiesAsGM(List<Party> parties_asGM) {
+        this.partiesAsGM = parties_asGM;
+    }
 }

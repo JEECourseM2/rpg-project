@@ -24,4 +24,5 @@ public class UserController {
         model.addAttribute("users", userService.findAllWithCharacterSheets());
         return "usersList";
     }
+
 }
