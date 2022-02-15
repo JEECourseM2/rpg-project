@@ -45,11 +45,11 @@ public class User extends GenericEntity{
         this.characterSheets = characterSheets;
     }
 
-    public List<Party> getGm_partiesAsGM() {
+    public List<Party> getPartiesAsGM() {
         return partiesAsGM;
     }
 
-    public void setGm_partiesAsGM(List<Party> parties_asGM) {
+    public void setPartiesAsGM(List<Party> parties_asGM) {
         this.partiesAsGM = parties_asGM;
     }
 }
