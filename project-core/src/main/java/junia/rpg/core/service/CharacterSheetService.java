@@ -25,4 +25,7 @@ public class CharacterSheetService {
     }
 
     public List<CharacterSheet> findUserCharacterSheetsWithUser(long userId) { return characterSheetDAO.findUserCharacterSheetsWithUser(userId); }
+
+    public List<CharacterSheet> findUserCharacterSheetsWithUser(String userName) { return characterSheetDAO.findUserCharacterSheetsWithUser(userName); }
+
 }

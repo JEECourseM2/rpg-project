@@ -30,4 +30,6 @@ public class PartyService {
 
     public List<Party> findUserPartiesWithCharacterSheetsAndUser(long userId) { return partyDAO.findUserPartiesWithCharacterSheetsAndUser(userId); }
 
+    public List<Party> findUserPartiesWithCharacterSheetsAndUser(String userName) { return partyDAO.findUserPartiesWithCharacterSheetsAndUser(userName); }
+
 }

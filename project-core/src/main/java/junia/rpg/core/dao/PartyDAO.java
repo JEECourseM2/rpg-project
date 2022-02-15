@@ -20,4 +20,8 @@ public interface PartyDAO extends JpaRepository<Party, Long> {
             "WHERE p.gmUser.id=:id OR c.user.id=:id ")
     List<Party> findUserPartiesWithCharacterSheetsAndUser(@Param("id") long id);
 
+    @Query("SELECT DISTINCT p FROM Party p LEFT JOIN FETCH p.gmUser LEFT JOIN FETCH p.characterSheets c LEFT JOIN FETCH c.user " +
+            "WHERE p.gmUser.name=:name OR c.user.name=:name ")
+    List<Party> findUserPartiesWithCharacterSheetsAndUser(@Param("name") String name);
+
 }
