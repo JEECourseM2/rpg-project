@@ -24,8 +24,14 @@ public class CharacterSheetController {
     @GetMapping(path = "/userCharacters")
     public String getUserCharactersList(@SessionAttribute("user") User user, ModelMap model) {
         model.addAttribute("currentUser", user);
-        model.addAttribute("userCharacterSheets", characterSheetService.findUserCharacterSheetsWithUser(user.getName()));
+        model.addAttribute("userCharacterSheets", characterSheetService.findUserCharacterSheetsWithUserAndParty(user.getName()));
         return "charactersList";
+    }
+
+    @GetMapping(path = "/createCharacter")
+    public String getCreateCharacterSheetForm(@SessionAttribute("user") User user, ModelMap model) {
+        model.addAttribute("currentUser", user);
+        return "createCharacterSheet";
     }
 
 }
