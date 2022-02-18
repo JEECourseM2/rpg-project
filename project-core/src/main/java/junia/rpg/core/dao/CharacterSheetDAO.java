@@ -12,6 +12,8 @@ public interface CharacterSheetDAO extends JpaRepository<CharacterSheet, Long> {
 
     CharacterSheet findByName(String name);
 
+    CharacterSheet findById(long id);
+
     @Query("SELECT DISTINCT c FROM CharacterSheet c LEFT JOIN FETCH c.user WHERE c.user.id=:id")
     List<CharacterSheet> findUserCharacterSheetsWithUser(@Param("id") long id);
 

@@ -117,16 +117,17 @@
                     <tr>
                         <th style="width: 10%" scope="row">Party</th>
                         <td>
-                            <p>$characterSheet.party.name</p>
+                            #if ($characterSheet.party)
+                                <p>$characterSheet.party.name</p>
+                            #else
+                                <p>none</p>
+                            #end
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <div class="callout">
-                    $characterSheet.notes
-                </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" href class="btn btn-outline-success btn-sm">edit</button>
+                    <a type="button" href="/project_web_war_exploded/web/$characterSheet.id/editCharacter" class="btn btn-outline-success btn-sm">edit</a>
                 </div>
             </div>
         </div>

@@ -56,31 +56,31 @@
     <hr style="border-top: 1px solid #8c8b8b;">
 
     <div class="container" style="padding-left:5%; padding-right:5%;">
-        <form>
+        <form method="post" action="/project_web_war_exploded/web/doCreateCharacter">
             <div style="max-width: 500px;">
                 <div class="row mb-3">
-                    <label for="inputName" class="col-sm-2 col-form-label"><b>Name</b></label>
+                    <label for="inputName" class="col-sm-2 col-form-label"><b>Name *</b></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputName">
+                        <input type="text" class="form-control" id="inputName" name="name" required>
                     </div>
                 </div>
                 <fieldset class="row mb-3">
                     <legend class="col-form-label col-sm-2 pt-0"><b>Gender</b></legend>
                     <div class="col-sm-10">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadiosM" value="M" checked>
+                            <input class="form-check-input" type="radio" name="gender" id="gridRadiosM" value="M">
                             <label class="form-check-label" for="gridRadiosM">
                                 Male
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadiosF" value="F">
+                            <input class="form-check-input" type="radio" name="gender" id="gridRadiosF" value="F">
                             <label class="form-check-label" for="gridRadiosF">
                                 Female
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadiosU" value="U">
+                            <input class="form-check-input" type="radio" name="gender" id="gridRadiosU" value="U" checked>
                             <label class="form-check-label" for="gridRadiosU">
                                 Undefined
                             </label>
@@ -90,19 +90,19 @@
                 <div class="row mb-3">
                     <label for="inputRace" class="col-sm-2 col-form-label"><b>Race</b></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputRace">
+                        <input type="text" class="form-control" id="inputRace" name="race" value="Undefined">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputLevel" class="col-sm-2 col-form-label"><b>Level</b></label>
                     <div class="col-sm-3">
-                        <input type="number" min="0" max="99" class="form-control" id="inputLevel" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                        <input type="number" min="0" max="99" class="form-control" id="inputLevel" name="level" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="inputWill" class="col-sm-2 col-form-label"><b>Will</b></label>
+                    <label for="inputWillStat" class="col-sm-2 col-form-label"><b>Will</b></label>
                     <div class="col-sm-3">
-                        <input type="number" min="0" max="99" class="form-control" id="inputWill" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                        <input type="number" min="0" max="99" class="form-control" id="inputWillStat" name="willStat" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                         <div class="row">
                             <label for="inputStrengthStat" class="col-sm-3 col-form-label">STR</label>
                             <div class="col-sm">
-                                <input type="number" min="0" max="99" class="form-control" aria-label="strengthStat" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                                <input type="number" min="0" max="99" class="form-control" aria-label="strengthStat" name="strengthStat" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                         <div class="row">
                             <label for="inputConstitutionStat" class="col-sm-3 col-form-label">CON</label>
                             <div class="col-sm">
-                                <input type="number" min="0" max="99" class="form-control" aria-label="constitutionStat" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                                <input type="number" min="0" max="99" class="form-control" aria-label="constitutionStat" name="constitutionStat" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                         <div class="row">
                             <label for="inputDexterityStat" class="col-sm-3 col-form-label">DEX</label>
                             <div class="col-sm">
-                                <input type="number" min="0" max="99" class="form-control" aria-label="dexterityStat" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                                <input type="number" min="0" max="99" class="form-control" aria-label="dexterityStat" name="dexterityStat" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                         <div class="row">
                             <label for="inputIntelligenceStat" class="col-sm-3 col-form-label">INT</label>
                             <div class="col-sm">
-                                <input type="number" min="0" max="99" class="form-control" aria-label="intellidenceStat" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                                <input type="number" min="0" max="99" class="form-control" aria-label="intelligenceStat" name="intelligenceStat" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                         <div class="row">
                             <label for="inputWisdomStat" class="col-sm-3 col-form-label">WIS</label>
                             <div class="col-sm">
-                                <input type="number" min="0" max="99" class="form-control"aria-label="wisdomStat" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                                <input type="number" min="0" max="99" class="form-control" aria-label="wisdomStat" name="wisdomStat" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                         <div class="row">
                             <label for="inputCharismaStat" class="col-sm-3 col-form-label">CHA</label>
                             <div class="col-sm">
-                                <input type="number" min="0" max="99" class="form-control"aria-label="charismaStat" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
+                                <input type="number" min="0" max="99" class="form-control" aria-label="charismaStat" name="charismaStat" value="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}">
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                 <div class="col-sm">
                     <div class="row">
                         <div class="col-sm">
-                            <input type="number" min="-999999999" max="999999999" onKeyUp="if(this.value>999999999){this.value='999999999';}else if(this.value<-999999999){this.value='-999999999';}"  class="form-control" id="inputMoney">
+                            <input type="number" class="form-control" min="-999999999" max="999999999" id="inputMoney" name="money" value="0" onKeyUp="if(this.value>999999999){this.value='999999999';}else if(this.value<-999999999){this.value='-999999999';}">
                         </div>
                         <div class="col-sm-7 col-form-label">
                             <i>Gold</i>
@@ -181,7 +181,7 @@
             <div class="row mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><b>Notes</b></span>
-                    <textarea class="form-control" aria-label="Notes"></textarea>
+                    <textarea class="form-control" aria-label="Notes" name="notes"></textarea>
                 </div>
             </div>
 
@@ -191,15 +191,6 @@
         </form>
     </div>
 </div>
-
-<script>
-    $('form input').keydown(function (e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            return false;
-        }
-    });
-</script>
 
 </body>
 </html>

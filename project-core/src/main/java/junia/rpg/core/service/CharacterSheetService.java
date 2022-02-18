@@ -24,6 +24,8 @@ public class CharacterSheetService {
         return characterSheetDAO.findByName(name);
     }
 
+    public CharacterSheet findById(long id) { return characterSheetDAO.findById(id); }
+
     public List<CharacterSheet> findUserCharacterSheetsWithUser(long userId) { return characterSheetDAO.findUserCharacterSheetsWithUser(userId); }
 
     public List<CharacterSheet> findUserCharacterSheetsWithUserAndParty(String userName) { return characterSheetDAO.findUserCharacterSheetsWithUserAndParty(userName); }

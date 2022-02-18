@@ -104,7 +104,7 @@ CREATE TABLE `characterSheet` (
   `money` int(9) NOT NULL DEFAULT 0,
   `notes` varchar(3000) NOT NULL DEFAULT '',
   `user_id` bigint(20) NOT NULL,
-  `party_id` bigint(20) NOT NULL,
+  `party_id` bigint(20) DEFAULT NULL,
   FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   FOREIGN KEY (`party_id`) REFERENCES `party` (`id`),
   PRIMARY KEY (`id`)
@@ -119,8 +119,8 @@ LOCK TABLES `characterSheet` WRITE;
 /*!40000 ALTER TABLE `characterSheet` DISABLE KEYS */;
 INSERT INTO `characterSheet`
     (id, creationDate, gender, race, name, level, user_id, party_id)
-    VALUES (11, '2019-09-16 10:00:39', 'F', 'Human', 'Françoise', 6, 8, 1),
-        (12, '2019-09-16 10:00:39', 'U', 'Human', 'Camil', 6, 10, 1),
+    VALUES (11, '2019-09-16 10:00:39', 'F', 'Human', 'Camille', 6, 8, 1),
+        (12, '2019-09-16 10:00:39', 'U', 'Human', 'Francis', 6, 10, 1),
         (13, '2019-09-16 10:00:39', 'M', 'Orc', 'Xorox', 6, 1, 1),
         (14, '2019-09-16 10:00:39', 'M', 'Dwarf', 'Philip', 7, 9, 1);
 /*!40000 ALTER TABLE `characterSheet` ENABLE KEYS */;
