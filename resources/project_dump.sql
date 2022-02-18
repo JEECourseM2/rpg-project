@@ -90,18 +90,19 @@ CREATE TABLE `characterSheet` (
   `id` bigint(20) NOT NULL,
   `creationDate` datetime DEFAULT NULL,
   `updateDate` datetime DEFAULT NULL,
-  `name` varchar(65) DEFAULT NULL,
-  `gender` varchar(1) DEFAULT NULL,
-  `race` varchar(65) DEFAULT NULL,
-  `will_stat` int(3) DEFAULT 0,
-  `strength_stat` tinyint(3) DEFAULT 0,
-  `constitution_stat` tinyint(3) DEFAULT 0,
-  `dexterity_stat` tinyint(3) DEFAULT 0,
-  `intelligence_stat` tinyint(3) DEFAULT 0,
-  `wisdom_stat` tinyint(3) DEFAULT 0,
-  `charisma_stat` tinyint(3) DEFAULT 0,
-  `level` tinyint(3) DEFAULT 0,
-  `money` float DEFAULT 50,
+  `name` varchar(65) NOT NULL DEFAULT '',
+  `gender` varchar(1) NOT NULL DEFAULT 'U',
+  `race` varchar(65) NOT NULL DEFAULT 'undefined',
+  `will_stat` tinyint(3) NOT NULL DEFAULT 0,
+  `strength_stat` tinyint(3) NOT NULL DEFAULT 0,
+  `constitution_stat` tinyint(3) NOT NULL DEFAULT 0,
+  `dexterity_stat` tinyint(3) NOT NULL DEFAULT 0,
+  `intelligence_stat` tinyint(3) NOT NULL DEFAULT 0,
+  `wisdom_stat` tinyint(3) NOT NULL DEFAULT 0,
+  `charisma_stat` tinyint(3) NOT NULL DEFAULT 0,
+  `level` tinyint(3) NOT NULL DEFAULT 0,
+  `money` int(9) NOT NULL DEFAULT 0,
+  `notes` varchar(3000) NOT NULL DEFAULT '',
   `user_id` bigint(20) NOT NULL,
   `party_id` bigint(20) NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
@@ -117,11 +118,11 @@ CREATE TABLE `characterSheet` (
 LOCK TABLES `characterSheet` WRITE;
 /*!40000 ALTER TABLE `characterSheet` DISABLE KEYS */;
 INSERT INTO `characterSheet`
-    (id, creationDate, name, level, user_id, party_id)
-    VALUES (11, '2019-09-16 10:00:39', 'Auchan', 6, 8, 1),
-        (12, '2019-09-16 10:00:39', 'Carrefour', 6, 10, 1),
-        (13, '2019-09-16 10:00:39', 'Walmart', 6, 1, 1),
-        (14, '2019-09-16 10:00:39', 'Philips', 7, 9, 1);
+    (id, creationDate, gender, race, name, level, user_id, party_id)
+    VALUES (11, '2019-09-16 10:00:39', 'F', 'Human', 'Françoise', 6, 8, 1),
+        (12, '2019-09-16 10:00:39', 'U', 'Human', 'Camil', 6, 10, 1),
+        (13, '2019-09-16 10:00:39', 'M', 'Orc', 'Xorox', 6, 1, 1),
+        (14, '2019-09-16 10:00:39', 'M', 'Dwarf', 'Philip', 7, 9, 1);
 /*!40000 ALTER TABLE `characterSheet` ENABLE KEYS */;
 UNLOCK TABLES;
 

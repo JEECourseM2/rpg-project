@@ -12,23 +12,25 @@ public class CharacterSheet extends GenericEntity {
 
     private String race;
 
-    private int will_stat;
+    private int willStat;
 
-    private int strength_stat;
+    private int strengthStat;
 
-    private int constitution_stat;
+    private int constitutionStat;
 
-    private int dexterity_stat;
+    private int dexterityStat;
 
-    private int intelligence_stat;
+    private int intelligenceStat;
 
-    private int wisdom_stat;
+    private int wisdomStat;
 
-    private int charisma_stat;
+    private int charismaStat;
 
     private int level;
 
-    private float money;
+    private int money;
+
+    private String notes;
 
     @ManyToOne
     private User user;
@@ -85,67 +87,75 @@ public class CharacterSheet extends GenericEntity {
         this.race = race;
     }
 
-    public int getWill_stat() {
-        return will_stat;
+    public int getWillStat() {
+        return willStat;
     }
 
-    public void setWill_stat(int will_stat) {
-        this.will_stat = will_stat;
+    public void setWillStat(int will_stat) {
+        this.willStat = will_stat;
     }
 
-    public int getStrength_stat() {
-        return strength_stat;
+    public int getStrengthStat() {
+        return strengthStat;
     }
 
-    public void setStrength_stat(int strength_stat) {
-        this.strength_stat = strength_stat;
+    public void setStrengthStat(int strength_stat) {
+        this.strengthStat = strength_stat;
     }
 
-    public int getConstitution_stat() {
-        return constitution_stat;
+    public int getConstitutionStat() {
+        return constitutionStat;
     }
 
-    public void setConstitution_stat(int constitution_stat) {
-        this.constitution_stat = constitution_stat;
+    public void setConstitutionStat(int constitution_stat) {
+        this.constitutionStat = constitution_stat;
     }
 
-    public int getDexterity_stat() {
-        return dexterity_stat;
+    public int getDexterityStat() {
+        return dexterityStat;
     }
 
-    public void setDexterity_stat(int dexterity_stat) {
-        this.dexterity_stat = dexterity_stat;
+    public void setDexterityStat(int dexterity_stat) {
+        this.dexterityStat = dexterity_stat;
     }
 
-    public int getIntelligence_stat() {
-        return intelligence_stat;
+    public int getIntelligenceStat() {
+        return intelligenceStat;
     }
 
-    public void setIntelligence_stat(int intelligence_stat) {
-        this.intelligence_stat = intelligence_stat;
+    public void setIntelligenceStat(int intelligence_stat) {
+        this.intelligenceStat = intelligence_stat;
     }
 
-    public int getWisdom_stat() {
-        return wisdom_stat;
+    public int getWisdomStat() {
+        return wisdomStat;
     }
 
-    public void setWisdom_stat(int wisdom_stat) {
-        this.wisdom_stat = wisdom_stat;
+    public void setWisdomStat(int wisdom_stat) {
+        this.wisdomStat = wisdom_stat;
     }
 
-    public int getCharisma_stat() {
-        return charisma_stat;
+    public int getCharismaStat() {
+        return charismaStat;
     }
 
-    public void setCharisma_stat(int charisma_stat) {
-        this.charisma_stat = charisma_stat;
+    public void setCharismaStat(int charisma_stat) {
+        this.charismaStat = charisma_stat;
     }
 
-    public float getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(float money) {
+    public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
