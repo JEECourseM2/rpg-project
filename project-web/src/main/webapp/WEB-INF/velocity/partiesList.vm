@@ -29,14 +29,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Characters</a>
+                    <a class="nav-link" href="/project_web_war_exploded/web/userCharacters">Characters</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Parties</a>
                 </li>
             </ul>
             <span class="navbar-text">
-		        <a class="nav-link" href="#" style="padding-top: 0px;padding-bottom: 0px;"><h3>$currentUser.name</h3></a>
+		        <a class="nav-link" href="/project_web_war_exploded/web/profile" style="padding-top: 0px;padding-bottom: 0px;"><h3>$currentUser.name</h3></a>
             </span>
         </div>
     </div>
@@ -60,13 +60,13 @@
         <table class="table table-hover">
             <thead class="table-light">
             <tr>
-                <th>Party name</th>
-                <th>GM</th>
-                <th>PJ 1</th>
-                <th>PJ 2</th>
-                <th>PJ 3</th>
-                <th>PJ 4</th>
-                <th></th>
+                <th style="width: 15%">Party name</th>
+                <th style="width: 10%">GM</th>
+                <th style="width: 10%">PC 1</th>
+                <th style="width: 10%">PC 2</th>
+                <th style="width: 10%">PC 3</th>
+                <th style="width: 10%">PC 4</th>
+                <th style="width: 10%"></th>
             </tr>
             </thead>
             <tbody>
@@ -74,8 +74,14 @@
             <tr>
                 <td>$party.name</td>
                 <td>$party.gmUser.name</td>
-                #foreach($characterSheet in $party.characterSheets)
-                    <td>$characterSheet.name</td>
+                #set($end = 4)
+                #set($stop = $end - 1)
+                #foreach($i in [0..$stop])
+                    #if($party.characterSheets.get($i))
+                        <td>$party.characterSheets.get($i).name</td>
+                    #else
+                        <td>-</td>
+                    #end
                 #end
                 <td style="text-align: right;">
                     <a href="" class="btn btn-outline-success btn-sm">edit</a>

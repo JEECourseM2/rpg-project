@@ -1,5 +1,6 @@
 package junia.rpg.web.controller;
 
+import junia.rpg.core.entity.Party;
 import junia.rpg.core.entity.User;
 import junia.rpg.core.service.PartyService;
 import junia.rpg.core.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.inject.Inject;
 import javax.jws.soap.SOAPBinding;
+import java.util.List;
 
 @Controller
 @RequestMapping("/web")
@@ -25,8 +27,12 @@ public class PartyController {
 
     @GetMapping(value = "/userParties")
     public String getUserPartiesList(@SessionAttribute("user") User user, ModelMap model) {
+        List<Party> parties = partyService.findUserPartiesWithCharacterSheetsAndUser(user.getName());
+        for (Party party: parties) {
+            party.setCharacterSheets(partyService.findOneByIdWithCharacterSheets(party.getId()).getCharacterSheets());
+        }
         model.addAttribute("currentUser", user);
-        model.addAttribute("userParties", partyService.findUserPartiesWithCharacterSheetsAndUser(user.getName()));
+        model.addAttribute("userParties", parties);
         return "partiesList";
     }
 
