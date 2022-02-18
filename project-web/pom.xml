@@ -37,6 +37,12 @@
             <groupId>com.shield-solutions</groupId>
             <artifactId>spring-velocity-adapter</artifactId>
             <version>1.0.0.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -60,6 +66,7 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
