@@ -45,7 +45,22 @@ public class LoginController {
 
     @GetMapping(value = "/register")
     public String getRegisterPage(ModelMap model) {
+        model.addAttribute("registerError", " ");
         return "registerForm";
+    }
+
+    @PostMapping("/doregister")
+    public String doRegister(@ModelAttribute ("user") User user, Model model){
+        List<User> allUsers = userService.findAll();
+        for (User u : allUsers){
+            if(u.getName().equals(user.getName())){
+                // username already exists
+                model.addAttribute("registerError", "Username already exists");
+                return "redirect:/register";
+            }
+        }
+        userService.save(user);
+        return "redirect:login";
     }
 
     // Add user in model attribute

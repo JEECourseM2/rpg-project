@@ -15,6 +15,20 @@
         }
     </style>
 
+    <script>
+        var check = function() {
+            if (document.getElementById('password').value ==
+                    document.getElementById('confirm_password').value) {
+                document.getElementById('submit_button').disabled = true;
+                document.getElementById('passwordConfirmError').style.color = 'green';
+                document.getElementById('passwordConfirmError').innerHTML = 'matching';
+            } else {
+                document.getElementById('submit_button').disabled = false;
+                document.getElementById('passwordConfirmError').style.color = 'red';
+                document.getElementById('passwordConfirmError').innerHTML = 'not matching';
+            }
+        }
+    </script>
 
 </head>
 
@@ -34,10 +48,13 @@
     <hr style="border-top: 2px solid #8c8b8b;">
     <br>
     <div class="container" style="width: 55%;">
-        <form data-bitwarden-watching="1">
+        <form method="post" action="/project_web_war_exploded/web/doregister">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input class="form-control" id="inputUsernameRegister" type="text">
+                <div style="text-align: center;">
+                    <small style="color: #ff5252; font-size-base: 10;">$registerError</small>
+                </div>
+                <label for="username" class="form-label">Username</label>
+                <input class="form-control" id="username" name="name" type="text">
                 <div class="col-auto">
                     <span id="passwordHelpInline" class="form-text">
                       Must be 4-14 characters long.
@@ -46,16 +63,18 @@
             </div>
             <br>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input class="form-control" id="inputPasswordRegister" type="password">
+                <label for="password" class="form-label">Password</label>
+                <input class="form-control" id="password" type="password" onkeyup="check();">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Confirm password</label>
-                <input class="form-control" id="inputPasswordRegister" type="password" aria-required="true" data-ok="false" data-com.bitwarden.browser.user-edited="yes">
-                <span class="error-msg" id="passwordConfirmErr"></span></div>
+                <label for="password" class="form-label">Confirm password</label>
+                <input class="form-control" id="confirm_password" name="password" type="password" onkeyup="check();" aria-required="true">
+                <span class="error-msg" id="passwordConfirmError"></span></div>
+
             <div class="d-flex justify-content-between" style="text-align: right;">
-                <a href="/project_web_war_exploded/web/login" class="btn btn-secondary btn-sm" type="button">cancel</a>
-                <button class="btn btn-dark btn-sm" type="submit">connect</button>
+
+                <a href="/project_web_war_exploded/web/login" class="btn btn-secondary btn-sm" type="button">Cancel</a>
+                <button class="btn btn-dark btn-sm" id="submit_button" type="submit">Register</button>
             </div>
         </form>
     </div>
