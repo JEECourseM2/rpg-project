@@ -40,14 +40,14 @@
     <br>
 
     <div class="container" style="width: 55%;">
-        <form method="post" action="/project_web_war_exploded/web/dologin" data-bitwarden-watching="1">
+        <form method="post" action="/project_web_war_exploded/web/dologin">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="text" class="form-control" id="inputUsernameLogIn" name="name">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="name">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPasswordLogIn" name="password">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password">
             </div>
             <div>
                 <a href="">forgot password</a></div>
