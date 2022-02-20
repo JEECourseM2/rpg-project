@@ -40,11 +40,11 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'2019-09-16 10:00:38', NULL,'user1', 'password'),
-                          (2,'2019-09-16 10:00:38', NULL,'user2', 'password'),
-                          (8,'2019-09-16 10:00:38', NULL,'user3', 'password'),
-                          (9,'2019-09-16 10:00:38', NULL,'user4', 'password'),
-                          (10,'2019-09-16 10:00:39', NULL,'user5', 'password');
+INSERT INTO `user` VALUES (1,'2019-09-16 10:00:38', NULL, 'user1', 'password'),
+                          (2,'2019-09-16 10:00:38', NULL, 'user2', 'password'),
+                          (3,'2019-09-16 10:00:38', NULL, 'user3', 'password'),
+                          (4,'2019-09-16 10:00:38', NULL, 'user4', 'password'),
+                          (5,'2019-09-16 10:00:39', NULL, 'user5', 'password');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,6 +77,40 @@ LOCK TABLES `party` WRITE;
 /*!40000 ALTER TABLE `party` DISABLE KEYS */;
 INSERT INTO `party` VALUES (1,'2019-09-16 10:00:38', NULL, 'Les Fers de Hache', 2, 'ceci sont des notes', 2);
 /*!40000 ALTER TABLE `party` ENABLE KEYS */;
+UNLOCK TABLES;
+--
+-- Table structure for table `char_party`
+--
+
+
+DROP TABLE IF EXISTS `char_party`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `char_party` (
+                         `id` bigint(20) NOT NULL,
+                         `creationDate` datetime DEFAULT NULL,
+                         `updateDate` datetime DEFAULT NULL,
+                         `pcUser_id` bigint(20) NOT NULL,
+                         `party_id` bigint(20) NOT NULL,
+                         `char_id` bigint(20) DEFAULT NULL,
+                         FOREIGN KEY (`pcUser_id`) REFERENCES `user` (`id`),
+                         FOREIGN KEY (`party_id`) REFERENCES `party` (`id`),
+                         FOREIGN KEY (`char_id`) REFERENCES `charactersheet` (`id`),
+                         PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `char_party`
+--
+
+LOCK TABLES `char_party` WRITE;
+/*!40000 ALTER TABLE `char_party` DISABLE KEYS */;
+INSERT INTO `char_party` (id, pcUser_id, party_id, char_id) VALUES (1, 1, 1, 3),
+                                                                   (2, 2, 1, 1),
+                                                                   (3, 3, 1, 4),
+                                                                   (4, 4, 1, 2);
+/*!40000 ALTER TABLE `char_party` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -119,10 +153,10 @@ LOCK TABLES `characterSheet` WRITE;
 /*!40000 ALTER TABLE `characterSheet` DISABLE KEYS */;
 INSERT INTO `characterSheet`
     (id, creationDate, gender, race, name, level, user_id, party_id)
-    VALUES (11, '2019-09-16 10:00:39', 'F', 'Human', 'Camille', 6, 8, 1),
-        (12, '2019-09-16 10:00:39', 'U', 'Human', 'Francis', 6, 10, 1),
-        (13, '2019-09-16 10:00:39', 'M', 'Orc', 'Xorox', 6, 1, 1),
-        (14, '2019-09-16 10:00:39', 'M', 'Dwarf', 'Philip', 7, 9, 1);
+    VALUES (1, '2019-09-16 10:00:39', 'F', 'Human', 'Camille', 6, 2, 1),
+        (2, '2019-09-16 10:00:39', 'U', 'Human', 'Francis', 6, 4, 1),
+        (3, '2019-09-16 10:00:39', 'M', 'Orc', 'Xorox', 6, 1, 1),
+        (4, '2019-09-16 10:00:39', 'M', 'Dwarf', 'Philip', 7, 3, 1);
 /*!40000 ALTER TABLE `characterSheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
