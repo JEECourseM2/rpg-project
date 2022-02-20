@@ -52,7 +52,7 @@
             <h3 style="position:absolute; bottom:0; margin:0;">List of parties</h3>
         </div>
         <div class="col-sm text-end">
-            <button type="button" style="padding-top: -4px;padding-bottom: -4px;padding-left: 15px;padding-right: 15px;" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"><h3>+</h3></span></button>
+            <a type="button" href="/project_web_war_exploded/web/createParty" style="padding-top: -4px;padding-bottom: -4px;padding-left: 15px;padding-right: 15px;" class="btn btn-sm btn-success"><h3>+</h3></a>
         </div>
     </div>
 
@@ -81,7 +81,11 @@
                 #set($stop = $end - 1)
                 #foreach($i in [0..$stop])
                     #if($party.characterSheets.get($i))
-                        <td>$party.characterSheets.get($i).name</td>
+                        <td>
+                            $party.characterSheets.get($i).name
+                            <br>
+                            <i style="color: lightslategrey; font-size: small;">$party.characterSheets.get($i).getUser().name</i>
+                        </td>
                     #else
                         <td>-</td>
                     #end

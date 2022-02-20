@@ -45,7 +45,7 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container" style="padding-bottom: 50px;">
 
     <div class="row" style="padding-left: 0px;">
         <div class="col-sm text-start" style="position:relative;">
@@ -71,12 +71,12 @@
                     <tr>
                         <th style="width: 10%" scope="row">Race</th>
                         <td>$characterSheet.race</td>
-                        <th style="width: 10%" scope="row">Gender</th>
-                        <td>$characterSheet.gender</td>
-                    </tr>
-                    <tr>
                         <th style="width: 10%" scope="row">Level</th>
                         <td>$characterSheet.level</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 10%" scope="row">Gender</th>
+                        <td>$characterSheet.gender</td>
                         <th style="width: 10%" scope="row">Will</th>
                         <td>$characterSheet.willStat</td>
                     </tr>
