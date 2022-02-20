@@ -16,6 +16,8 @@ public class PartyService {
         this.partyDAO = partyDAO;
     }
 
+    public void save(Party party) { partyDAO.save(party); }
+
     public Party findByName(final String name) {
         return partyDAO.findByName(name);
     }
