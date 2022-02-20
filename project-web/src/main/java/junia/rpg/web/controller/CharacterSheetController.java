@@ -9,9 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 @Controller
 @RequestMapping("/web")
@@ -65,8 +62,7 @@ public class CharacterSheetController {
     }
 
     @PostMapping(path = "/{id}/doEditCharacter")
-    public String doCreateCharacterSheet(@SessionAttribute("user") User user,
-                                         @PathVariable("id") long id,
+    public String doCreateCharacterSheet(@PathVariable("id") long id,
                                          @ModelAttribute("characterSheet") CharacterSheet characterSheet) {
         // double check on name
         if(characterSheet == null || characterSheet.getName() == null || characterSheet.getName() == "") {
@@ -89,6 +85,12 @@ public class CharacterSheetController {
         bddCharacterSheet.setNotes(characterSheet.getNotes());
         // update in bdd
         characterSheetService.save(bddCharacterSheet);
+        return "redirect:../userCharacters";
+    }
+
+    @PostMapping(path = "/{id}/doDeleteCharacter")
+    public String doDeleteCharacter(@PathVariable("id") long id) {
+        characterSheetService.deleteById(id);
         return "redirect:../userCharacters";
     }
 

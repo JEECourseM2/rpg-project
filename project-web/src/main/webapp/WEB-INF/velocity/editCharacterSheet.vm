@@ -48,8 +48,15 @@
 <div class="container" style="padding-bottom: 50px;">
 
     <div class="row" style="padding-left: 0px;">
-        <div class="col-sm text-start" style="position:relative;">
-            <h3>Edit a character</h3>
+        <div class="col-sm text-start">
+            <h3 style="margin-bottom:0px;">Edit a character</h3>
+        </div>
+        <div class="col-sm text-end">
+            <form method="post" action="/project_web_war_exploded/web/$characterSheet.id/doDeleteCharacter">
+                <button type="submit" class="btn btn-sm btn-danger">
+                    delete
+                </button>
+            </form>
         </div>
     </div>
 

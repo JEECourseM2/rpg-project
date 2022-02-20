@@ -48,8 +48,8 @@
 <div class="container" style="padding-bottom: 50px;">
 
     <div class="row" style="padding-left: 0px;">
-        <div class="col-sm text-start" style="position:relative;">
-            <h3>Create a character</h3>
+        <div class="col-sm text-start">
+            <h3 style="margin-bottom:0px;">Create a character</h3>
         </div>
     </div>
 

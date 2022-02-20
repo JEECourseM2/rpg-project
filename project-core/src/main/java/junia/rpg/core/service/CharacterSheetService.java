@@ -20,11 +20,15 @@ public class CharacterSheetService {
         characterSheetDAO.save(characterSheet);
     }
 
+    public void deleteById(Long id) { characterSheetDAO.deleteById(id); }
+
     public CharacterSheet findByName(String name) {
         return characterSheetDAO.findByName(name);
     }
 
     public CharacterSheet findById(long id) { return characterSheetDAO.findById(id); }
+
+    public CharacterSheet findByIdWithUser(long id) { return characterSheetDAO.findByIdWithUser(id); }
 
     public List<CharacterSheet> findUserCharacterSheetsWithUser(long userId) { return characterSheetDAO.findUserCharacterSheetsWithUser(userId); }
 
