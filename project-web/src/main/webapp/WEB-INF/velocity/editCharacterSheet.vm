@@ -198,6 +198,19 @@
                 </div>
             </div>
 
+            <div class="row mb-3" style="max-width: 500px;">
+                <label for="inputParty" class="col-sm-2 col-form-label"><b>Party</b></label>
+                <div class="col-sm">
+                    <select class="form-select form-select" id="selectParty" name="selectParty">
+                        <option value="$characterSheet.party.id">$characterSheet.party.name</option>
+                        <option></option>
+                        #foreach($charParty in $charParties)
+                            <option value="$charParty.id">$charParty.name</option>
+                        #end
+                    </select>
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><b>Notes</b></span>

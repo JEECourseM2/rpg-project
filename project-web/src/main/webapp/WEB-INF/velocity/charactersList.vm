@@ -120,7 +120,7 @@
                             #if ($characterSheet.party)
                                 <p>$characterSheet.party.name</p>
                             #else
-                                <p>none</p>
+                                <p style="color:lightslategrey;"><i>none</i></p>
                             #end
                         </td>
                     </tr>

@@ -2,6 +2,8 @@ package junia.rpg.core.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class CharacterSheet extends GenericEntity {
@@ -158,4 +160,5 @@ public class CharacterSheet extends GenericEntity {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
 }

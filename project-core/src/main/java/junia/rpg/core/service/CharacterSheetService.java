@@ -16,8 +16,9 @@ public class CharacterSheetService {
         this.characterSheetDAO = characterSheetDAO;
     }
 
-    public void save(CharacterSheet characterSheet) {
-        characterSheetDAO.save(characterSheet);
+
+    public CharacterSheet save(CharacterSheet characterSheet) {
+        return characterSheetDAO.save(characterSheet);
     }
 
     public void deleteById(Long id) { characterSheetDAO.deleteById(id); }
@@ -27,6 +28,8 @@ public class CharacterSheetService {
     }
 
     public CharacterSheet findById(long id) { return characterSheetDAO.findById(id); }
+
+    public CharacterSheet findByIdWithCharacterSheets(long id) { return characterSheetDAO.findByIdWithCharacterSheets(id); }
 
     public CharacterSheet findByIdWithUser(long id) { return characterSheetDAO.findByIdWithUser(id); }
 
