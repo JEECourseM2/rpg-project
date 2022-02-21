@@ -6,12 +6,13 @@ import junia.rpg.core.entity.User;
 import junia.rpg.core.service.CharacterSheetService;
 import junia.rpg.core.service.PartyService;
 import junia.rpg.core.service.UserService;
+import junia.rpg.web.dto.PartyDTO;
+import junia.rpg.web.utils.MappingUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,56 +35,63 @@ public class PartyController {
     @GetMapping(value = "/userParties")
     public String getUserPartiesList(@SessionAttribute("user") User user, ModelMap model) {
         List<Party> parties = partyService.findUserPartiesWithCharacterSheetsAndUser(user.getName());
+        List<PartyDTO> partiesDTO = new ArrayList<>();
         for (Party party: parties) {
             party.setCharacterSheets(partyService.findOneByIdWithCharacterSheets(party.getId()).getCharacterSheets());
             for(CharacterSheet characterSheet : party.getCharacterSheets()) {
                 characterSheet.setUser(characterSheetService.findByIdWithUser(characterSheet.getId()).getUser());
             }
+            partiesDTO.add(MappingUtils.mapPartyToDTO(party, userService));
         }
         model.addAttribute("currentUser", user);
-        model.addAttribute("userParties", parties);
+        model.addAttribute("userParties", partiesDTO);
         return "partiesList";
     }
 
     @GetMapping(path = "/createParty")
     public String createParty(@SessionAttribute("user") User user, ModelMap model) {
         model.addAttribute("currentUser", user);
-        model.addAttribute("allUsers", userService.findAll().remove(user));
+        List<User> allUsers = userService.findAll();
+        allUsers.remove(user);
+        model.addAttribute("allUsers", allUsers);
         model.addAttribute("message", "");
         return "createParty";
     }
 
     @PostMapping(path = "/doCreateParty")
-    public String doCreateParty(@SessionAttribute("user") User user,
-                                @ModelAttribute("party") Party party,
-                                @ModelAttribute("selectPC1") String usernamePC1,
-                                @ModelAttribute("selectPC2") String usernamePC2,
-                                @ModelAttribute("selectPC3") String usernamePC3,
-                                @ModelAttribute("selectPC4") String usernamePC4,
-                                ModelMap model) {
-        // double check on name
+    public String doCreateParty(@SessionAttribute("user") User user, @ModelAttribute("party") Party party, ModelMap model,
+                                @ModelAttribute("selectPC1") String usernamePC1, @ModelAttribute("selectPC2") String usernamePC2,
+                                @ModelAttribute("selectPC3") String usernamePC3, @ModelAttribute("selectPC4") String usernamePC4) {
+        // Double check on name
         if(party == null || party.getName() == null || party.getName() == "") {
             return "redirect:createParty";
         }
 
-        // check all different users
-        List<String> pcUsernames = Arrays.asList(usernamePC1, usernamePC2, usernamePC3, usernamePC4);
-        if(pcUsernames.stream().distinct().count() > 1) {
+        // Check if all different users
+        List<String> pcUsernames = new ArrayList<String>(Arrays.asList(usernamePC1, usernamePC2, usernamePC3, usernamePC4));
+        pcUsernames.removeIf(u -> u.equals("")); // remove null values
+        if(pcUsernames.contains(user.getName()) || (pcUsernames.size() != 1 && pcUsernames.stream().distinct().count() <= 1)) {
             model.addAttribute("currentUser", user);
-            model.addAttribute("allUsers", userService.findAll().remove(user));
-            model.addAttribute("message", "Please do not chose a user more than once.");
+            List<User> allUsers = userService.findAll();
+            allUsers.remove(user);
+            model.addAttribute("allUsers", allUsers);
+            model.addAttribute("message", "Please do not choose a user more than once.");
             return "createParty";
         }
 
-        // save created party
+        // Save created party
         party.setGmUser(userService.findByName(user.getName()));
-        partyService.save(party);
-        // save the PC users in link table
-        
-
+        // Save the PC users
+        party.setPC1(usernamePC1);
+        party.setPC2(usernamePC2);
+        party.setPC3(usernamePC3);
+        party.setPC4(usernamePC4);
+        Party bddParty = partyService.save(party);
 
         return "redirect:userParties";
     }
+
+    // TODO : do edit party
 
     @ModelAttribute("party")
     public Party setUpPartyForm() { return new Party(); }

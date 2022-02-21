@@ -16,10 +16,16 @@ public class PartyService {
         this.partyDAO = partyDAO;
     }
 
-    public void save(Party party) { partyDAO.save(party); }
+    public Party save(Party party) { return partyDAO.save(party); }
+
+    public Party findById(long id) { return partyDAO.findById(id); }
 
     public Party findByName(final String name) {
         return partyDAO.findByName(name);
+    }
+
+    public List<Party> findAll() {
+        return partyDAO.findAll();
     }
 
     public List<Party> findAllWithCharacterSheets() {
@@ -28,12 +34,10 @@ public class PartyService {
 
     public Party findOneByIdWithCharacterSheets(long partyId) { return partyDAO.findOneByIdWithCharacterSheets(partyId); }
 
-    public List<Party> findAll() {
-        return partyDAO.findAll();
-    }
-
     public List<Party> findUserPartiesWithCharacterSheetsAndUser(long userId) { return partyDAO.findUserPartiesWithCharacterSheetsAndUser(userId); }
 
     public List<Party> findUserPartiesWithCharacterSheetsAndUser(String userName) { return partyDAO.findUserPartiesWithCharacterSheetsAndUser(userName); }
+
+    public List<Party> findUserPartiesAsPCWithCharacterSheets(String userName) { return partyDAO.findUserPartiesAsPCWithCharacterSheets(userName); }
 
 }

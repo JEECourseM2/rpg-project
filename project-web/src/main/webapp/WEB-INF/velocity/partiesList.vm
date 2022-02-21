@@ -77,19 +77,26 @@
             <tr>
                 <td>$party.name</td>
                 <td>$party.gmUser.name</td>
-                #set($end = 4)
-                #set($stop = $end - 1)
-                #foreach($i in [0..$stop])
-                    #if($party.characterSheets.get($i))
-                        <td>
-                            $party.characterSheets.get($i).name
-                            <br>
-                            <i style="color: lightslategrey; font-size: small;">$party.characterSheets.get($i).getUser().name</i>
-                        </td>
-                    #else
-                        <td>-</td>
-                    #end
-                #end
+                <td>
+                    $party.getPCCharacterSheetName($party.PC1)
+                    <br>
+                    <i style="color: lightslategrey; font-size: small;">$party.PC1</i>
+                </td>
+                <td>
+                    $party.getPCCharacterSheetName($party.PC2)
+                    <br>
+                    <i style="color: lightslategrey; font-size: small;">$party.PC2</i>
+                </td>
+                <td>
+                    $party.getPCCharacterSheetName($party.PC3)
+                    <br>
+                    <i style="color: lightslategrey; font-size: small;">$party.PC3</i>
+                </td>
+                <td>
+                    $party.getPCCharacterSheetName($party.PC4)
+                    <br>
+                    <i style="color: lightslategrey; font-size: small;">$party.PC4</i>
+                </td>
                 <td style="text-align: right;">
                     <a href="" class="btn btn-outline-success btn-sm">edit</a>
                 </td>

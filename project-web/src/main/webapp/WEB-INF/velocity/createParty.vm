@@ -74,16 +74,16 @@
 
             <br>
             <div class="row mb-3">
-                <b>Members</b>
-                <small style="color: #ff5252; font-size-base: 10;">$message</small>
+                <b>Members <small style="color: #ff5252; font-size-base: 10;">$message</small></b>
+
             </div>
             <div class="row mb-3" style="max-width: 700px;">
                 <div class="row mb-3 row-cols-auto">
                     <label for="inputPC1" class="d-flex col col-form-label justify-content-end align-items-center">PC 1</label>
-                    <div class="col-sm-6">
-                        <select class="form-select form-select-lg" id="selectPC1" name="selectPC1">
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <select class="form-select form-select" id="selectPC1" name="selectPC1">
                             #foreach($user in $allUsers)
-                            <option>$user.name</option>
+                            <option value="$user.name">$user.name</option>
                             #end
                         </select>
                     </div>
@@ -93,10 +93,11 @@
                 </div>
                 <div class="row mb-3 row-cols-auto">
                     <label for="inputPC2" class="d-flex col col-form-label justify-content-end align-items-center">PC 2</label>
-                    <div class="col-sm-6">
-                        <select class="form-select form-select-lg" id="selectPC2" name="selectPC2" style="visibility: hidden;">
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <select class="form-select form-select" id="selectPC2" name="selectPC2" style="visibility: hidden;">
+                            <option></option>
                             #foreach($user in $allUsers)
-                                <option>$user.name</option>
+                                <option value="$user.name">$user.name</option>
                             #end
                         </select>
                     </div>
@@ -109,10 +110,11 @@
                 </div>
                 <div class="row mb-3 row-cols-auto">
                     <label for="inputPC3" class="d-flex col col-form-label justify-content-end align-items-center">PC 3</label>
-                    <div class="col-sm-6">
-                        <select class="form-select form-select-lg" id="selectPC3" name="selectPC3" style="visibility: hidden;">
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <select class="form-select form-select" id="selectPC3" name="selectPC3" style="visibility: hidden;">
+                            <option></option>
                             #foreach($user in $allUsers)
-                                <option>$user.name</option>
+                                <option value="$user.name">$user.name</option>
                             #end
                         </select>
                     </div>
@@ -125,10 +127,11 @@
                 </div>
                 <div class="row mb-3 row-cols-auto">
                     <label for="inputPC4" class="d-flex col col-form-label justify-content-end align-items-center">PC 4</label>
-                    <div class="col-sm-6">
-                        <select class="form-select form-select-lg" id="selectPC4" name="selectPC4" style="visibility: hidden;">
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <select class="form-select form-select" id="selectPC4" name="selectPC4" style="visibility: hidden;">
+                            <option></option>
                             #foreach($user in $allUsers)
-                                <option>$user.name</option>
+                                <option value="$user.name">$user.name</option>
                             #end
                         </select>
                     </div>
