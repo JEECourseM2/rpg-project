@@ -52,7 +52,6 @@ UNLOCK TABLES;
 -- Table structure for table `party`
 --
 
-
 DROP TABLE IF EXISTS `party`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -62,6 +61,10 @@ CREATE TABLE `party` (
   `updateDate` datetime DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `sessionNumber` int(11) DEFAULT 0,
+  `PC1` varchar(255) NOT NULL,
+  `PC2` varchar(255) DEFAULT NULL,
+  `PC3` varchar(255) DEFAULT NULL,
+  `PC4` varchar(255) DEFAULT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `gmUser_id` bigint(20) NOT NULL,
   FOREIGN KEY (`gmUser_id`) REFERENCES `user` (`id`),
@@ -75,42 +78,8 @@ CREATE TABLE `party` (
 
 LOCK TABLES `party` WRITE;
 /*!40000 ALTER TABLE `party` DISABLE KEYS */;
-INSERT INTO `party` VALUES (1,'2019-09-16 10:00:38', NULL, 'Les Fers de Hache', 2, 'ceci sont des notes', 2);
+INSERT INTO `party` VALUES (1,'2019-09-16 10:00:38', NULL, 'Les Fers de Hache', 2, 'user2', 'user4', 'user1', 'user3', 'ceci sont des notes', 2);
 /*!40000 ALTER TABLE `party` ENABLE KEYS */;
-UNLOCK TABLES;
---
--- Table structure for table `char_party`
---
-
-
-DROP TABLE IF EXISTS `char_party`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `char_party` (
-                         `id` bigint(20) NOT NULL,
-                         `creationDate` datetime DEFAULT NULL,
-                         `updateDate` datetime DEFAULT NULL,
-                         `pcUser_id` bigint(20) NOT NULL,
-                         `party_id` bigint(20) NOT NULL,
-                         `char_id` bigint(20) DEFAULT NULL,
-                         FOREIGN KEY (`pcUser_id`) REFERENCES `user` (`id`),
-                         FOREIGN KEY (`party_id`) REFERENCES `party` (`id`),
-                         FOREIGN KEY (`char_id`) REFERENCES `charactersheet` (`id`),
-                         PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `char_party`
---
-
-LOCK TABLES `char_party` WRITE;
-/*!40000 ALTER TABLE `char_party` DISABLE KEYS */;
-INSERT INTO `char_party` (id, pcUser_id, party_id, char_id) VALUES (1, 1, 1, 3),
-                                                                   (2, 2, 1, 1),
-                                                                   (3, 3, 1, 4),
-                                                                   (4, 4, 1, 2);
-/*!40000 ALTER TABLE `char_party` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
