@@ -17,13 +17,12 @@
 
     <script>
         var check = function() {
-            if (document.getElementById('password').value ==
-                    document.getElementById('confirm_password').value) {
-                document.getElementById('submit_button').disabled = true;
+            if (document.getElementById('password').value === document.getElementById('confirm_password').value) {
+                document.getElementById('submit_button').disabled = false;
                 document.getElementById('passwordConfirmError').style.color = 'green';
                 document.getElementById('passwordConfirmError').innerHTML = 'matching';
             } else {
-                document.getElementById('submit_button').disabled = false;
+                document.getElementById('submit_button').disabled = true;
                 document.getElementById('passwordConfirmError').style.color = 'red';
                 document.getElementById('passwordConfirmError').innerHTML = 'not matching';
             }
