@@ -1,8 +1,11 @@
 package junia.rpg.core.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -23,7 +26,8 @@ public class Party extends GenericEntity{
 
     private String PC4;
 
-    @OneToMany(mappedBy = "party")
+    @OneToMany(mappedBy = "party", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.JOIN)
     private List<CharacterSheet> characterSheets;
 
     @ManyToOne
