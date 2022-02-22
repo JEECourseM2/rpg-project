@@ -40,4 +40,11 @@ public class PartyService {
 
     public List<Party> findUserPartiesAsPCWithCharacterSheets(String userName) { return partyDAO.findUserPartiesAsPCWithCharacterSheets(userName); }
 
+    public List<Party> findPartiesById(long userId){
+        return partyDAO.findPartiesById(userId);
+    }
+
+    public List<Party> findPartiesByGmUserId(long gmUserId){
+        return partyDAO.findPartiesByGmUserId(gmUserId);
+    }
 }

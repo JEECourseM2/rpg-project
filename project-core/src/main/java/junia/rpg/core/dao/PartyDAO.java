@@ -33,4 +33,10 @@ public interface PartyDAO extends JpaRepository<Party, Long> {
             "WHERE (p.PC1=:name OR p.PC2=:name OR p.PC3=:name OR p.PC4=:name) ")
     List<Party> findUserPartiesAsPCWithCharacterSheets(@Param("name") String name);
 
+    @Query
+    List<Party> findPartiesById(long userId);
+
+    @Query
+    List<Party> findPartiesByGmUserId(long gmUserId);
+
 }
