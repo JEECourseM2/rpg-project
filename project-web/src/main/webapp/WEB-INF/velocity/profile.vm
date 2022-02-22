@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RPG</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            padding-top: 100px;
+        }
+    </style>
+
+    <script>
+        var check = function() {
+            if (document.getElementById('inputPasswordNew').value === document.getElementById('inputPasswordNewVerify').value) {
+                document.getElementById('saveButton').disabled = false;
+                document.getElementById('passwordMessage').style.color = 'green';
+                document.getElementById('passwordMessage').innerHTML = 'matching';
+            } else {
+                document.getElementById('saveButton').disabled = true;
+                document.getElementById('passwordMessage').style.color = 'red';
+                document.getElementById('passwordMessage').innerHTML = 'not matching';
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">RPG Project</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/project_web_war_exploded/web/userCharacters">Characters</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/project_web_war_exploded/web/userParties">Parties</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+		        <a class="nav-link" href="#" style="padding-top: 0px;padding-bottom: 0px;"><h3>$currentUser.name</h3></a>
+            </span>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row" style="padding-left: 0px;">
+        <div class="col-sm text-start" style="position:relative;">
+            <h3 style="position:absolute; bottom:0; margin:0;">Profile</h3>
+        </div>
+        <div class="col-sm text-end">
+            <button type="button" style="padding-top: -4px;padding-bottom: -4px;padding-left: 15px;padding-right: 15px;" class="btn btn-sm btn-outline-danger">Log out</button>
+        </div>
+    </div>
+    <hr style="border-top: 1px solid #8c8b8b;">
+
+    <div class="row">
+        <div class="col-sm">
+            <b>Username</b>
+        </div>
+        <div class="col-sm">
+            $currentUser.name
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+    <br>
+    <!--  Change password  -->
+    <div class="row">
+        <div class="col-sm">
+            <b>Change password</b>
+        </div>
+        <div class="col-sm"></div>
+        <div class="col-sm"></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+
+            <form class="form" role="form" autocomplete="off">
+                <div class="form-group">
+                    <label for="inputPasswordOld">Current Password</label>
+                    <input type="password" class="form-control" name="currentPassword" id="inputPasswordOld" required="">
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <label for="inputPasswordNew">New Password</label>
+                    <input type="password" class="form-control" name="newPassword" id="inputPasswordNew" required="" onkeyup="check();">
+                </div>
+                <div class="form-group">
+                    <label for="inputPasswordNewVerify">Verify</label>
+                    <input type="password" class="form-control" id="inputPasswordNewVerify" required="" onkeyup="check();">
+                    <span class="form-text small text-muted">
+                        To confirm, type the new password again.
+                    </span>
+                </div>
+                <span id="passwordMessage"></span>
+                <div class="form-group">
+                    <button type="submit" disabled id="saveButton" class="btn btn-outline-success float-right">Save</button>
+                </div>
+                <span style="font-size-base: 10;">$passwordChangedMessage</span>
+            </form>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+
+    <br>
+     <!--  Stats -->
+    <div class="row">
+        <div class="col-sm">
+            <b>Number of Characters</b>
+        </div>
+        <div class="col-sm">
+            $currentUser.getCharacterSheets().size()
+        </div>
+        <div class="col-sm"></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <b>Number of Parties</b>
+        </div>
+        <div class="col-sm">
+            // TODO
+        </div>
+        <div class="col-sm">
+
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <b>GM</b>
+        </div>
+        <div class="col-sm">
+            $currentUser.getPartiesAsGM().size()
+        </div>
+        <div class="col-sm"></div>
+    </div>
+
+    <br>
+
+
+    <div class="row">
+        <div class="col-sm">
+            <b>PC</b>
+        </div>
+        <div class="col-sm">
+            // TODO
+            $currentUser.parties.size
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+
+</body>
+</html>
