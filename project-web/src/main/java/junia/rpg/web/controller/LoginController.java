@@ -8,11 +8,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 @RequestMapping("/web")
-@SessionAttributes("user")
 public class LoginController {
 
     private UserService userService;
@@ -29,13 +29,12 @@ public class LoginController {
     }
 
     @PostMapping("/dologin")
-    public String doLogin(@ModelAttribute("user") User user, Model model) {
+    public String doLogin(HttpSession httpSession,@ModelAttribute("user") User user, Model model) {
         List<User> allUsers = userService.findAll();
         // check if user is registered and if the password match when found
         for (User u : allUsers) {
             if (user.getName().equals(u.getName()) && user.getPassword().equals(u.getPassword())) {
-                user.setCharacterSheets(u.getCharacterSheets());
-                user.setPartiesAsGM(u.getPartiesAsGM());
+                httpSession.setAttribute("user", u);
                 return "redirect:userCharacters";
             }
         }
@@ -56,7 +55,7 @@ public class LoginController {
             if(u.getName().equals(user.getName())){
                 // username already exists
                 model.addAttribute("registerError", "Username already exists");
-                return "redirect:/register";
+                return "registerForm";
             }
         }
         userService.save(user);

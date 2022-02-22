@@ -5,12 +5,12 @@ import junia.rpg.core.entity.Party;
 import junia.rpg.core.entity.User;
 import junia.rpg.core.service.CharacterSheetService;
 import junia.rpg.core.service.PartyService;
-import junia.rpg.core.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +20,11 @@ public class CharacterSheetController {
 
     private CharacterSheetService characterSheetService;
     private PartyService partyService;
-    private UserService userService;
 
     @Inject
-    public CharacterSheetController(CharacterSheetService characterSheetService, UserService userService, PartyService partyService) {
+    public CharacterSheetController(CharacterSheetService characterSheetService, PartyService partyService) {
         this.characterSheetService = characterSheetService;
         this.partyService = partyService;
-        this.userService = userService;
     }
 
     @ModelAttribute("characterSheet")
@@ -35,39 +33,47 @@ public class CharacterSheetController {
     }
 
     @GetMapping(path = "/userCharacters")
-    public String getUserCharactersList(@SessionAttribute("user") User user, ModelMap model) {
+    public String getUserCharactersList(HttpSession httpSession, ModelMap model) {
+        User user = (User) httpSession.getAttribute("user");
         model.addAttribute("currentUser", user);
-        model.addAttribute("userCharacterSheets", characterSheetService.findUserCharacterSheetsWithUserAndParty(user.getName()));
+        model.addAttribute("userCharacterSheets", user.getCharacterSheets());
+
         return "charactersList";
     }
 
     @GetMapping(path = "/createCharacter")
-    public String getCreateCharacterSheetForm(@SessionAttribute("user") User user, ModelMap model) {
+    public String getCreateCharacterSheetForm(HttpSession httpSession, ModelMap model) {
+        User user = (User) httpSession.getAttribute("user");
         model.addAttribute("currentUser", user);
         model.addAttribute("charParties", getUserCharacterSheetLessPartiesAsPC(user, model));
         return "createCharacterSheet";
     }
 
     @PostMapping(path = "/doCreateCharacter")
-    public String doCreateCharacterSheet(@SessionAttribute("user") User user,
+    public String doCreateCharacterSheet(HttpSession httpSession,
                                          @ModelAttribute("characterSheet") CharacterSheet characterSheet,
                                          @ModelAttribute("selectParty") String partyId) {
         // double check on name
-        if(characterSheet == null || characterSheet.getName() == null || characterSheet.getName().isEmpty()) {
+        if( null == characterSheet || null == characterSheet.getName() || characterSheet.getName().isEmpty()) {
             return "redirect:createCharacter";
         }
-        characterSheet.setUser(userService.findByName(user.getName()));
-        if (!partyId.isEmpty()) characterSheet.setParty(partyService.findById(Long.valueOf(partyId)));
+
+        User user = (User) httpSession.getAttribute("user");
+        characterSheet.setUser(user);
+        if (!partyId.isEmpty()) characterSheet.setParty(partyService.findById(Long.parseLong(partyId)));
         characterSheetService.save(characterSheet);
         return "redirect:userCharacters";
     }
 
     @GetMapping(path = "/{id}/editCharacter")
-    public String getEditCharacterSheetForm(@SessionAttribute("user") User user,
+    public String getEditCharacterSheetForm(HttpSession httpSession,
                                             @PathVariable("id") long id,
                                             ModelMap model) {
+        User user = (User) httpSession.getAttribute("user");
+
         model.addAttribute("currentUser", user);
-        model.addAttribute("characterSheet", characterSheetService.findByIdWithCharacterSheets(id));
+        CharacterSheet characterSheetFromId = user.getCharacterSheets().stream().filter(characterSheet -> id == characterSheet.getId()).findFirst().orElse(null);
+        model.addAttribute("characterSheet", characterSheetFromId);
         model.addAttribute("charParties", getUserCharacterSheetLessPartiesAsPC(user, model));
         return "editCharacterSheet";
     }

@@ -3,7 +3,6 @@ package junia.rpg.web.controller;
 import junia.rpg.core.entity.CharacterSheet;
 import junia.rpg.core.entity.Party;
 import junia.rpg.core.entity.User;
-import junia.rpg.core.service.CharacterSheetService;
 import junia.rpg.core.service.PartyService;
 import junia.rpg.core.service.UserService;
 import junia.rpg.web.dto.PartyDTO;
@@ -13,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,48 +22,51 @@ import java.util.List;
 public class PartyController {
 
     private PartyService partyService;
-    private CharacterSheetService characterSheetService;
     private UserService userService;
 
     @Inject
-    public PartyController(PartyService partyService, CharacterSheetService characterSheetService, UserService userService) {
+    public PartyController(PartyService partyService, UserService userService) {
         this.partyService = partyService;
-        this.characterSheetService = characterSheetService;
         this.userService = userService;
     }
 
     @GetMapping(value = "/userParties")
-    public String getUserPartiesList(@SessionAttribute("user") User user, ModelMap model) {
-        List<Party> parties = partyService.findUserPartiesWithCharacterSheetsAndUser(user.getName());
+    public String getUserPartiesList(HttpSession httpSession, ModelMap model) {
+        User user = (User) httpSession.getAttribute("user");
+        List<Party> parties = partyService.findPartiesById(user.getId());
+        parties.addAll(partyService.findPartiesByGmUserId(user.getId()));
+
         List<PartyDTO> partiesDTO = new ArrayList<>();
+
         for (Party party: parties) {
-            party.setCharacterSheets(partyService.findOneByIdWithCharacterSheets(party.getId()).getCharacterSheets());
-            for(CharacterSheet characterSheet : party.getCharacterSheets()) {
-                characterSheet.setUser(characterSheetService.findByIdWithUser(characterSheet.getId()).getUser());
-            }
             partiesDTO.add(MappingUtils.mapPartyToDTO(party, userService));
         }
+
         model.addAttribute("currentUser", user);
         model.addAttribute("userParties", partiesDTO);
         return "partiesList";
     }
 
     @GetMapping(path = "/createParty")
-    public String createParty(@SessionAttribute("user") User user, ModelMap model) {
+    public String createParty(HttpSession httpSession, ModelMap model) {
+        User user = (User) httpSession.getAttribute("user");
         model.addAttribute("currentUser", user);
+
         List<User> allUsers = userService.findAll();
         allUsers.remove(user);
         model.addAttribute("allUsers", allUsers);
+
         model.addAttribute("message", "");
         return "createParty";
     }
 
     @PostMapping(path = "/doCreateParty")
-    public String doCreateParty(@SessionAttribute("user") User user, @ModelAttribute("party") Party party, ModelMap model,
+    public String doCreateParty(HttpSession httpSession, @ModelAttribute("party") Party party, ModelMap model,
                                 @ModelAttribute("selectPC1") String usernamePC1, @ModelAttribute("selectPC2") String usernamePC2,
                                 @ModelAttribute("selectPC3") String usernamePC3, @ModelAttribute("selectPC4") String usernamePC4) {
+        User user = (User) httpSession.getAttribute("user");
         // Double check on name
-        if(party == null || party.getName() == null || party.getName() == "") {
+        if( null == party || null == party.getName() || party.getName().isEmpty()) {
             return "redirect:createParty";
         }
 
@@ -80,13 +83,14 @@ public class PartyController {
         }
 
         // Save created party
-        party.setGmUser(userService.findByName(user.getName()));
+        party.setGmUser(user);
+
         // Save the PC users
         party.setPC1(usernamePC1);
         party.setPC2(usernamePC2);
         party.setPC3(usernamePC3);
         party.setPC4(usernamePC4);
-        Party bddParty = partyService.save(party);
+        partyService.save(party);
 
         return "redirect:userParties";
     }
