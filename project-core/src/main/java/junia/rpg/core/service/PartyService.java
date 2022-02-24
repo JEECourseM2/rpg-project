@@ -18,6 +18,8 @@ public class PartyService {
 
     public Party save(Party party) { return partyDAO.save(party); }
 
+    public void deleteById(long id) { partyDAO.deleteById(id); }
+
     public Party findById(long id) { return partyDAO.findById(id); }
 
     public Party findByName(final String name) {

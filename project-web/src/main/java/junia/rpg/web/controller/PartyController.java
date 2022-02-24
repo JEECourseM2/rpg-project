@@ -53,7 +53,7 @@ public class PartyController {
         model.addAttribute("currentUser", user);
 
         List<User> allUsers = userService.findAll();
-        allUsers.remove(user);
+        allUsers.removeIf(u -> u.getId() == user.getId());
         model.addAttribute("allUsers", allUsers);
 
         model.addAttribute("message", "");
@@ -103,8 +103,12 @@ public class PartyController {
         model.addAttribute("currentUser", user);
 
         Party partyFromId = partyService.findById(id);
+
+        List<User> allUsers = userService.findAll();
+        allUsers.removeIf(u -> u.getId() == user.getId());
+
         model.addAttribute("party", partyFromId);
-        model.addAttribute("allUsers", userService.findAll());
+        model.addAttribute("allUsers", allUsers);
         model.addAttribute("message", "");
         return "editParty";
     }
@@ -147,6 +151,14 @@ public class PartyController {
         // Save in database
         partyService.save(bddParty);
 
+        return "redirect:../userParties";
+    }
+
+    @PostMapping(path = "/{id}/doDeleteParty")
+    public String doDeleteParty(HttpSession httpSession, @PathVariable("id") long id) {
+        User user = (User) httpSession.getAttribute("user");
+        partyService.deleteById(id);
+        httpSession.setAttribute("user", userService.updateUser(user.getId()));
         return "redirect:../userParties";
     }
 
