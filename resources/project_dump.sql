@@ -96,6 +96,7 @@ CREATE TABLE `characterSheet` (
   `name` varchar(40) NOT NULL DEFAULT '',
   `gender` varchar(1) NOT NULL DEFAULT 'U',
   `race` varchar(40) NOT NULL DEFAULT 'undefined',
+  `job` varchar(40) NOT NULL DEFAULT 'undefined',
   `will_stat` tinyint(3) NOT NULL DEFAULT 0,
   `strength_stat` tinyint(3) NOT NULL DEFAULT 0,
   `constitution_stat` tinyint(3) NOT NULL DEFAULT 0,
@@ -121,11 +122,11 @@ CREATE TABLE `characterSheet` (
 LOCK TABLES `characterSheet` WRITE;
 /*!40000 ALTER TABLE `characterSheet` DISABLE KEYS */;
 INSERT INTO `characterSheet`
-    (id, creationDate, gender, race, name, level, user_id, party_id)
-    VALUES (1, '2019-09-16 10:00:39', 'F', 'Human', 'Camille', 6, 2, null),
-        (2, '2019-09-16 10:00:39', 'U', 'Human', 'Francis', 6, 4, 1),
-        (3, '2019-09-16 10:00:39', 'M', 'Orc', 'Xorox', 6, 1, 1),
-        (4, '2019-09-16 10:00:39', 'M', 'Dwarf', 'Philip', 7, 3, 1);
+    (id, creationDate, gender, job, race, name, level, user_id, party_id)
+    VALUES (1, '2019-09-16 10:00:39', 'F', 'Swordmaster', 'Human', 'Camille', 6, 2, null),
+        (2, '2019-09-16 10:00:39', 'U', 'Spiritualist', 'Human', 'Francis', 6, 4, 1),
+        (3, '2019-09-16 10:00:39', 'M', 'Paladin', 'Orc', 'Xorox', 6, 1, 1),
+        (4, '2019-09-16 10:00:39', 'M', 'Farmer', 'Dwarf', 'Philip', 7, 3, 1);
 /*!40000 ALTER TABLE `characterSheet` ENABLE KEYS */;
 UNLOCK TABLES;
 

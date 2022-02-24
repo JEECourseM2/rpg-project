@@ -96,7 +96,8 @@ public class CharacterSheetController {
         // update all fields
         bddCharacterSheet.setName(characterSheet.getName());
         bddCharacterSheet.setGender(characterSheet.getGender());
-        bddCharacterSheet.setRace(characterSheet.getRace());
+        bddCharacterSheet.setRace(characterSheet.getRace());;
+        bddCharacterSheet.setJob(characterSheet.getJob());
         bddCharacterSheet.setLevel(characterSheet.getLevel());
         bddCharacterSheet.setWillStat(characterSheet.getWillStat());
         bddCharacterSheet.setStrengthStat(characterSheet.getStrengthStat());

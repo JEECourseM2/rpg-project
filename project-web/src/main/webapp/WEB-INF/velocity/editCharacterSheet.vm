@@ -54,7 +54,7 @@
         <div class="col-sm text-end">
             <form method="post" action="/project_web_war_exploded/web/$characterSheet.id/doDeleteCharacter">
                 <button type="submit" class="btn btn-sm btn-danger">
-                    delete
+                    Delete
                 </button>
             </form>
         </div>
@@ -111,6 +111,12 @@
                     <label for="inputRace" class="col-sm-2 col-form-label"><b>Race</b></label>
                     <div class="col-sm-10">
                         <input type="text" maxlength="30" class="form-control" id="inputRace" name="race" value="$characterSheet.race">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputJob" class="col-sm-2 col-form-label"><b>Class</b></label>
+                    <div class="col-sm-10">
+                        <input type="text" maxlength="30" class="form-control" id="inputJob" name="job" value="$characterSheet.job">
                     </div>
                 </div>
                 <div class="row mb-3">

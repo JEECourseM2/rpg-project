@@ -14,6 +14,8 @@ public class CharacterSheet extends GenericEntity {
 
     private String race;
 
+    private String job;
+
     private int willStat;
 
     private int strengthStat;
@@ -87,6 +89,14 @@ public class CharacterSheet extends GenericEntity {
 
     public void setRace(String race) {
         this.race = race;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public int getWillStat() {

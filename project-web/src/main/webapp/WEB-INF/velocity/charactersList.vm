@@ -80,6 +80,10 @@
                         <th style="width: 10%" scope="row">Will</th>
                         <td>$characterSheet.willStat</td>
                     </tr>
+                    <tr>
+                        <th style="width: 10%" scope="row">Class</th>
+                        <td>$characterSheet.job</td>
+                    </tr>
                     </tbody>
                 </table>
                 <table class="table table-bordered table-sm">
