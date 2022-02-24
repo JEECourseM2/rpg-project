@@ -74,7 +74,10 @@
 
             <br>
             <div class="row mb-3">
-                <b>Members <small style="color: #ff5252; font-size-base: 10;">$message</small></b>
+                <div class="col-sm text-start">
+                    <b>Members</b>
+                </div>
+                <small style="color: #ff5252; font-size-base: 10;">$message</small>
 
             </div>
             <div class="row mb-3" style="max-width: 700px;">

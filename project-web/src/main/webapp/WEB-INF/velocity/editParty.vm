@@ -81,8 +81,10 @@
 
             <br>
             <div class="row mb-3">
-                <div class="col-sm text-start"><b>Members</b></div>
-                <div class="col-sm text-end"><small style="color: #ff5252; font-size-base: 10;">$message</small></div>
+                <div class="col-sm text-start">
+                    <b>Members</b>
+                </div>
+                <small style="color: #ff5252; font-size-base: 10;">$message</small>
 
             </div>
             <div class="row mb-3" style="max-width: 700px;">
