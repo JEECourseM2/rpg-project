@@ -5,6 +5,7 @@ import junia.rpg.core.entity.Party;
 import junia.rpg.core.entity.User;
 import junia.rpg.core.service.CharacterSheetService;
 import junia.rpg.core.service.PartyService;
+import junia.rpg.core.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +21,13 @@ public class CharacterSheetController {
 
     private CharacterSheetService characterSheetService;
     private PartyService partyService;
+    private UserService userService;
 
     @Inject
-    public CharacterSheetController(CharacterSheetService characterSheetService, PartyService partyService) {
+    public CharacterSheetController(CharacterSheetService characterSheetService, PartyService partyService, UserService userService) {
         this.characterSheetService = characterSheetService;
         this.partyService = partyService;
+        this.userService = userService;
     }
 
     @ModelAttribute("characterSheet")
@@ -62,6 +65,7 @@ public class CharacterSheetController {
         characterSheet.setUser(user);
         if (!partyId.isEmpty()) characterSheet.setParty(partyService.findById(Long.parseLong(partyId)));
         characterSheetService.save(characterSheet);
+        httpSession.setAttribute("user", userService.updateUser(user.getId()));
         return "redirect:userCharacters";
     }
 
@@ -79,9 +83,11 @@ public class CharacterSheetController {
     }
 
     @PostMapping(path = "/{id}/doEditCharacter")
-    public String doCreateCharacterSheet(@PathVariable("id") long id,
+    public String doCreateCharacterSheet(HttpSession httpSession, @PathVariable("id") long id,
                                          @ModelAttribute("characterSheet") CharacterSheet characterSheet,
                                          @ModelAttribute("selectParty") String partyId) {
+        User user = (User) httpSession.getAttribute("user");
+
         // double check on name
         if(characterSheet == null || characterSheet.getName() == null || characterSheet.getName() == "") {
             return "redirect:editCharacter";
@@ -105,12 +111,15 @@ public class CharacterSheetController {
         else bddCharacterSheet.setParty(null);
         // update in bdd
         characterSheetService.save(bddCharacterSheet);
+        httpSession.setAttribute("user", userService.updateUser(user.getId()));
         return "redirect:../userCharacters";
     }
 
     @PostMapping(path = "/{id}/doDeleteCharacter")
-    public String doDeleteCharacter(@PathVariable("id") long id) {
+    public String doDeleteCharacter(HttpSession httpSession, @PathVariable("id") long id) {
+        User user = (User) httpSession.getAttribute("user");
         characterSheetService.deleteById(id);
+        httpSession.setAttribute("user", userService.updateUser(user.getId()));
         return "redirect:../userCharacters";
     }
 

@@ -33,4 +33,7 @@ public class UserService{
     public List<User> findAll() { return  userDAO.findAll(); }
 
     public List<User> findAllWithCharacterSheets() { return  userDAO.findAllWithCharacterSheets(); }
+
+    public User updateUser(long id) { return userDAO.findById(id); }
+
 }
