@@ -26,6 +26,8 @@ public class Party extends GenericEntity{
 
     private String PC4;
 
+    private String notes;
+
     @OneToMany(mappedBy = "party", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.JOIN)
     private List<CharacterSheet> characterSheets;
@@ -96,6 +98,14 @@ public class Party extends GenericEntity{
 
     public void setPC4(String PC4) {
         this.PC4 = PC4;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
 }

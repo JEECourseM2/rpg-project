@@ -63,7 +63,7 @@
     <hr style="border-top: 1px solid #8c8b8b;">
 
     <div class="container" style="padding-left:5%; padding-right:5%;">
-        <form method="post" action="/project_web_war_exploded/web/doEditParty">
+        <form method="post" action="/project_web_war_exploded/web/$party.id/doEditParty">
             <div style="max-width: 700px;">
                 <div class="row mb-3">
                     <label for="inputName" class="col-sm-3 col-form-label"><b>Name *</b></label>
@@ -96,13 +96,13 @@
                         </select>
                     </div>
                     <div class="col">
-                        <button type="button" id="buttonPlusPC1" class="btn btn-outlined-success"><h3 style="margin-bottom:0px;">+</h3></button>
+                        <button type="button" id="buttonPlusPC1" class="btn btn-outlined-success" #if($party.PC2!="")style="visibility: hidden;"#end><h3 style="margin-bottom:0px;">+</h3></button>
                     </div>
                 </div>
                 <div class="row mb-3 row-cols-auto">
                     <label for="inputPC2" class="d-flex col col-form-label justify-content-end align-items-center">PC 2</label>
                     <div class="col-sm-6 d-flex align-items-center">
-                        <select class="form-select form-select" id="selectPC2" name="selectPC2" style="visibility: hidden;">
+                        <select class="form-select form-select" id="selectPC2" name="selectPC2" #if($party.PC2=="")style="visibility: hidden;"#end>
                             <option></option>
                             #foreach($user in $allUsers)
                                 <option value="$user.name" #if($party.PC2==$user.name)selected#end>$user.name</option>
@@ -110,16 +110,16 @@
                         </select>
                     </div>
                     <div class="col">
-                        <button type="button" id="buttonMinusPC2" class="btn btn-outlined-success" style="visibility: hidden;"><h3 style="margin-bottom:0px;">-</h3></button>
+                        <button type="button" id="buttonMinusPC2" class="btn btn-outlined-success" #if($party.PC2=="" || $party.PC3!="")style="visibility: hidden;"#end><h3 style="margin-bottom:0px;">-</h3></button>
                     </div>
                     <div class="col">
-                        <button type="button" id="buttonPlusPC2" class="btn btn-outlined-success" style="visibility: hidden;"><h3 style="margin-bottom:0px;">+</h3></button>
+                        <button type="button" id="buttonPlusPC2" class="btn btn-outlined-success" #if($party.PC2=="" || $party.PC3!="")style="visibility: hidden;"#end><h3 style="margin-bottom:0px;">+</h3></button>
                     </div>
                 </div>
                 <div class="row mb-3 row-cols-auto">
                     <label for="inputPC3" class="d-flex col col-form-label justify-content-end align-items-center">PC 3</label>
                     <div class="col-sm-6 d-flex align-items-center">
-                        <select class="form-select form-select" id="selectPC3" name="selectPC3" style="visibility: hidden;">
+                        <select class="form-select form-select" id="selectPC3" name="selectPC3" #if($party.PC3=="")style="visibility: hidden;"#end>
                             <option></option>
                             #foreach($user in $allUsers)
                                 <option value="$user.name" #if($party.PC3==$user.name)selected#end>$user.name</option>
@@ -127,16 +127,16 @@
                         </select>
                     </div>
                     <div class="col">
-                        <button type="button" id="buttonMinusPC3" class="btn btn-outlined-success" style="visibility: hidden;"><h3 style="margin-bottom:0px;">-</h3></button>
+                        <button type="button" id="buttonMinusPC3" class="btn btn-outlined-success" #if($party.PC3=="" || $party.PC4!="")style="visibility: hidden;"#end><h3 style="margin-bottom:0px;">-</h3></button>
                     </div>
                     <div class="col">
-                        <button type="button" id="buttonPlusPC3" class="btn btn-outlined-success" style="visibility: hidden;"><h3 style="margin-bottom:0px;">+</h3></button>
+                        <button type="button" id="buttonPlusPC3" class="btn btn-outlined-success" #if($party.PC3=="" || $party.PC4!="")style="visibility: hidden;"#end><h3 style="margin-bottom:0px;">+</h3></button>
                     </div>
                 </div>
                 <div class="row mb-3 row-cols-auto">
                     <label for="inputPC4" class="d-flex col col-form-label justify-content-end align-items-center">PC 4</label>
                     <div class="col-sm-6 d-flex align-items-center">
-                        <select class="form-select form-select" id="selectPC4" name="selectPC4" style="visibility: hidden;">
+                        <select class="form-select form-select" id="selectPC4" name="selectPC4" #if($party.PC4=="")style="visibility: hidden;"#end>
                             <option></option>
                             #foreach($user in $allUsers)
                                 <option value="$user.name" #if($party.PC4==$user.name)selected#end>$user.name</option>
@@ -144,7 +144,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <button type="button" id="buttonMinusPC4" class="btn btn-outlined-success" style="visibility: hidden;"><h3 style="margin-bottom:0px;">-</h3></button>
+                        <button type="button" id="buttonMinusPC4" class="btn btn-outlined-success" #if($party.PC4=="")style="visibility: hidden;"#end><h3 style="margin-bottom:0px;">-</h3></button>
                     </div>
                 </div>
             </div>
@@ -158,7 +158,7 @@
 
             <br>
             <a type="button" href="/project_web_war_exploded/web/userParties" class="btn btn-outline-danger">Cancel</a>
-            <span style="float:right;"><button type="submit" class="btn btn-success">Create</button></span>
+            <span style="float:right;"><button type="submit" class="btn btn-success">Edit</button></span>
         </form>
     </div>
 </div>
