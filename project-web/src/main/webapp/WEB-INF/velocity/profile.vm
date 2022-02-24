@@ -65,7 +65,9 @@
             <h3 style="position:absolute; bottom:0; margin:0;">Profile</h3>
         </div>
         <div class="col-sm text-end">
-            <button type="button" style="padding-top: -4px;padding-bottom: -4px;padding-left: 15px;padding-right: 15px;" class="btn btn-sm btn-outline-danger">Log out</button>
+            <form  method="post" action="/project_web_war_exploded/web/logOut">
+                <button name="logout" value="logout" type="submit" style="padding-top: -4px;padding-bottom: -4px;padding-left: 15px;padding-right: 15px;" class="btn btn-sm btn-outline-danger">Log out</button>
+            </form>
         </div>
     </div>
     <hr style="border-top: 1px solid #8c8b8b;">
@@ -93,7 +95,7 @@
     <div class="row">
         <div class="col-sm">
 
-            <form class="form" role="form" autocomplete="off">
+            <form method="post" action="/project_web_war_exploded/web/changePassword" class="form" role="form" autocomplete="off">
                 <div class="form-group">
                     <label for="inputPasswordOld">Current Password</label>
                     <input type="password" class="form-control" name="currentPassword" id="inputPasswordOld" required="">
@@ -135,10 +137,10 @@
     <br>
     <div class="row">
         <div class="col-sm">
-            <b>Number of Parties</b>
+            <b>Total number of Parties</b>
         </div>
         <div class="col-sm">
-            // TODO
+            $totalNumberOfParties
         </div>
         <div class="col-sm">
 
@@ -147,10 +149,10 @@
     <br>
     <div class="row">
         <div class="col-sm">
-            <b>GM</b>
+            <b>Parties as GM</b>
         </div>
         <div class="col-sm">
-            $currentUser.getPartiesAsGM().size()
+            $numberOfPartiesAsGM
         </div>
         <div class="col-sm"></div>
     </div>
@@ -160,11 +162,10 @@
 
     <div class="row">
         <div class="col-sm">
-            <b>PC</b>
+            <b>Parties as PC</b>
         </div>
         <div class="col-sm">
-            // TODO
-            $currentUser.parties.size
+            $numberOfPartiesAsPlayer
         </div>
         <div class="col-sm"></div>
     </div>
