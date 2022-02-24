@@ -54,7 +54,7 @@
         <div class="col-sm text-end">
             <form method="post" action="/project_web_war_exploded/web/$party.id/doDeleteParty">
                 <button type="submit" class="btn btn-sm btn-danger">
-                    delete
+                    Delete
                 </button>
             </form>
         </div>
