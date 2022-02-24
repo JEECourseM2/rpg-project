@@ -68,7 +68,7 @@
                 <div class="row mb-3">
                     <label for="inputName" class="col-sm-2 col-form-label"><b>Name</b></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputName" name="name" value="$characterSheet.name" required>
+                        <input type="text" maxlength="30" class="form-control" id="inputName" name="name" value="$characterSheet.name" required>
                     </div>
                 </div>
                 <fieldset class="row mb-3">
@@ -110,7 +110,7 @@
                 <div class="row mb-3">
                     <label for="inputRace" class="col-sm-2 col-form-label"><b>Race</b></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputRace" name="race" value="$characterSheet.race">
+                        <input type="text" maxlength="30" class="form-control" id="inputRace" name="race" value="$characterSheet.race">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -202,8 +202,11 @@
                 <label for="inputParty" class="col-sm-2 col-form-label"><b>Party</b></label>
                 <div class="col-sm">
                     <select class="form-select form-select" id="selectParty" name="selectParty">
-                        <option value="$characterSheet.party.id">$characterSheet.party.name</option>
-                        <option></option>
+                        #if($characterSheet.party)
+                            <option value="$characterSheet.party.id">$characterSheet.party.name</option>
+                        #else
+                            <option></option>
+                        #end
                         #foreach($charParty in $charParties)
                             <option value="$charParty.id">$charParty.name</option>
                         #end
@@ -214,7 +217,7 @@
             <div class="row mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><b>Notes</b></span>
-                    <textarea class="form-control" aria-label="Notes" name="notes">$characterSheet.notes</textarea>
+                    <textarea class="form-control" maxlength="2990" aria-label="Notes" name="notes">$characterSheet.notes</textarea>
                 </div>
             </div>
 

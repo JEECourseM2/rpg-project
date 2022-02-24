@@ -61,7 +61,7 @@
                 <div class="row mb-3">
                     <label for="inputName" class="col-sm-3 col-form-label"><b>Name *</b></label>
                     <div class="col">
-                        <input type="text" class="form-control" id="inputName" name="name" required>
+                        <input type="text" maxlength="30" class="form-control" id="inputName" name="name" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -144,7 +144,7 @@
             <div class="row mb-3">
                 <div class="input-group">
                     <span class="input-group-text"><b>Notes</b></span>
-                    <textarea class="form-control" aria-label="Notes" name="notes"></textarea>
+                    <textarea class="form-control" maxlength="2990" aria-label="Notes" name="notes"></textarea>
                 </div>
             </div>
 

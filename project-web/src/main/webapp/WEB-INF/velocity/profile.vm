@@ -98,17 +98,17 @@
             <form method="post" action="/project_web_war_exploded/web/changePassword" class="form" role="form" autocomplete="off">
                 <div class="form-group">
                     <label for="inputPasswordOld">Current Password</label>
-                    <input type="password" class="form-control" name="currentPassword" id="inputPasswordOld" required="">
+                    <input type="password" maxlength="30" class="form-control" name="currentPassword" id="inputPasswordOld" required="">
                 </div>
 
                 <br>
                 <div class="form-group">
                     <label for="inputPasswordNew">New Password</label>
-                    <input type="password" class="form-control" name="newPassword" id="inputPasswordNew" required="" onkeyup="check();">
+                    <input type="password" maxlength="30" class="form-control" name="newPassword" id="inputPasswordNew" required="" onkeyup="check();">
                 </div>
                 <div class="form-group">
                     <label for="inputPasswordNewVerify">Verify</label>
-                    <input type="password" class="form-control" id="inputPasswordNewVerify" required="" onkeyup="check();">
+                    <input type="password" maxlength="30" class="form-control" id="inputPasswordNewVerify" required="" onkeyup="check();">
                     <span class="form-text small text-muted">
                         To confirm, type the new password again.
                     </span>
