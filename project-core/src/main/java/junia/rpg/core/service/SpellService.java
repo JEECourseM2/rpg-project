@@ -19,6 +19,8 @@ public class SpellService {
 
     public List<Spell> findAll() { return spellDAO.findAll(); }
 
+    public List<Spell> findAllByName(String name) { return spellDAO.findAllByName(name); }
+
     public List<Spell> findAllByType(String type) { return spellDAO.findAllByType(type); }
 
     public List<Spell> findAllByLevel(int level) { return spellDAO.findAllByLevel(level); }

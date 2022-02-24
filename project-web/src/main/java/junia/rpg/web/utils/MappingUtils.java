@@ -1,8 +1,11 @@
 package junia.rpg.web.utils;
 
 import junia.rpg.core.entity.Party;
+import junia.rpg.core.entity.Spell;
+import junia.rpg.core.service.SpellService;
 import junia.rpg.core.service.UserService;
 import junia.rpg.web.dto.PartyDTO;
+import junia.rpg.web.dto.SpellDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +28,15 @@ public final class MappingUtils {
                 userService.findByName(party.getPC3()),
                 userService.findByName(party.getPC4()))));
         dto.setGmUser(party.getGmUser());
+        return dto;
+    }
+
+    public static SpellDTO mapSpellToDTO(Spell spell) {
+        SpellDTO dto = new SpellDTO();
+        dto.setName(spell.getName());
+        dto.setType(spell.getType());
+        dto.setLevel(spell.getLevel());
+        dto.setDescription(spell.getDescription());
         return dto;
     }
 
