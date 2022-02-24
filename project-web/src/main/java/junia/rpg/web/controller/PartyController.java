@@ -74,9 +74,9 @@ public class PartyController {
         List<String> pcUsernames = new ArrayList<String>(Arrays.asList(usernamePC1, usernamePC2, usernamePC3, usernamePC4));
         pcUsernames.removeIf(u -> u.equals("")); // remove null values
         if(pcUsernames.contains(user.getName()) || (pcUsernames.size() != 1 && pcUsernames.stream().distinct().count() <= 1)) {
-            model.addAttribute("currentUser", user);
             List<User> allUsers = userService.findAll();
             allUsers.remove(user);
+            model.addAttribute("currentUser", user);
             model.addAttribute("allUsers", allUsers);
             model.addAttribute("message", "Please do not choose a user more than once.");
             return "createParty";
@@ -95,7 +95,60 @@ public class PartyController {
         return "redirect:userParties";
     }
 
-    // TODO : do edit party
+    @GetMapping(path = "/{id}/editParty")
+    public String getEditParty(HttpSession httpSession,
+                               @PathVariable("id") long id,
+                               ModelMap model) {
+        User user = (User) httpSession.getAttribute("user");
+        model.addAttribute("currentUser", user);
+
+        Party partyFromId = partyService.findById(id);
+        model.addAttribute("party", partyFromId);
+        model.addAttribute("allUsers", userService.findAll());
+        model.addAttribute("message", "");
+        return "editParty";
+    }
+
+
+    @PostMapping(path = "/{id}/doEditParty")
+    public String doEditParty(HttpSession httpSession, @PathVariable("id") long id,
+                              @ModelAttribute("party") Party party, ModelMap model,
+                              @ModelAttribute("selectPC1") String usernamePC1, @ModelAttribute("selectPC2") String usernamePC2,
+                              @ModelAttribute("selectPC3") String usernamePC3, @ModelAttribute("selectPC4") String usernamePC4) {
+        // Double check on name
+        if( null == party || null == party.getName() || party.getName().isEmpty()) {
+            return "redirect:editParty";
+        }
+
+        // Check if all different users
+        User user = (User) httpSession.getAttribute("user");
+        List<String> pcUsernames = new ArrayList<String>(Arrays.asList(usernamePC1, usernamePC2, usernamePC3, usernamePC4));
+        pcUsernames.removeIf(u -> u.equals("")); // remove null values
+        if(pcUsernames.contains(user.getName()) || (pcUsernames.size() != 1 && pcUsernames.stream().distinct().count() <= 1)) {
+            List<User> allUsers = userService.findAll();
+            allUsers.remove(user);
+            Party partyFromId = partyService.findById(id);
+            model.addAttribute("currentUser", user);
+            model.addAttribute("party", partyFromId);
+            model.addAttribute("allUsers", allUsers);
+            model.addAttribute("message", "Please do not choose a user more than once.");
+            return "editParty";
+        }
+
+        // Update party values
+        Party bddParty = partyService.findById(id);
+        bddParty.setName(party.getName());
+        bddParty.setSessionNumber(party.getSessionNumber());
+        bddParty.setPC1(usernamePC1);
+        bddParty.setPC2(usernamePC2);
+        bddParty.setPC3(usernamePC3);
+        bddParty.setPC4(usernamePC4);
+        bddParty.setNotes(party.getNotes());
+        // Save in database
+        partyService.save(bddParty);
+
+        return "redirect:../userParties";
+    }
 
     @ModelAttribute("party")
     public Party setUpPartyForm() { return new Party(); }
