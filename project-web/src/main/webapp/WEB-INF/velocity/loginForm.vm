@@ -50,12 +50,14 @@
                 <input type="password" maxlength="30" class="form-control" id="password" name="password">
             </div>
             <div>
-                <a href="">forgot password</a></div>
-            <div>
-                <a href="/project_web_war_exploded/web/register">register</a>
-            </div>
-            <div style="text-align: right;">
-                <button type="submit" class="btn btn-dark btn-sm">connect</button>
+                <a href="/project_web_war_exploded/web/register">
+                    <button type="button" style="float: left;" class="btn btn btn-outline-secondary btn-sm">
+                        Register
+                    </button>
+                </a>
+                <button type="submit" class="btn btn-dark btn-sm" style="float: right;">
+                    Connect
+                </button>
             </div>
         </form>
     </div>
