@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `rpg_project` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE IF NOT EXISTS `rpg_project` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `rpg_project`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
@@ -62,9 +62,9 @@ CREATE TABLE `party` (
   `name` varchar(40) DEFAULT NULL,
   `sessionNumber` int(11) DEFAULT 0,
   `PC1` varchar(30) NOT NULL,
-  `PC2` varchar(30) DEFAULT NULL,
-  `PC3` varchar(30) DEFAULT NULL,
-  `PC4` varchar(30) DEFAULT NULL,
+  `PC2` varchar(30) DEFAULT '',
+  `PC3` varchar(30) DEFAULT '',
+  `PC4` varchar(30) DEFAULT '',
   `notes` varchar(3000) DEFAULT NULL,
   `gmUser_id` bigint(20) NOT NULL,
   FOREIGN KEY (`gmUser_id`) REFERENCES `user` (`id`),
@@ -78,7 +78,7 @@ CREATE TABLE `party` (
 
 LOCK TABLES `party` WRITE;
 /*!40000 ALTER TABLE `party` DISABLE KEYS */;
-INSERT INTO `party` VALUES (1,'2019-09-16 10:00:38', NULL, 'Les Fers de Hache', 2, 'user2', 'user4', 'user1', 'user3', 'ceci sont des notes', 2);
+INSERT INTO `party` VALUES (1,'2019-09-16 10:00:38', NULL, 'Les Fers de Hache', 2, 'user1', 'user4', 'user3', '', 'ceci sont des notes', 2);
 /*!40000 ALTER TABLE `party` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ LOCK TABLES `characterSheet` WRITE;
 /*!40000 ALTER TABLE `characterSheet` DISABLE KEYS */;
 INSERT INTO `characterSheet`
     (id, creationDate, gender, race, name, level, user_id, party_id)
-    VALUES (1, '2019-09-16 10:00:39', 'F', 'Human', 'Camille', 6, 2, 1),
+    VALUES (1, '2019-09-16 10:00:39', 'F', 'Human', 'Camille', 6, 2, null),
         (2, '2019-09-16 10:00:39', 'U', 'Human', 'Francis', 6, 4, 1),
         (3, '2019-09-16 10:00:39', 'M', 'Orc', 'Xorox', 6, 1, 1),
         (4, '2019-09-16 10:00:39', 'M', 'Dwarf', 'Philip', 7, 3, 1);
