@@ -75,24 +75,24 @@
             <tbody>
             #foreach($party in $userParties)
             <tr>
-                <td>$party.name</td>
-                <td>$party.gmUser.name</td>
-                <td>
+                <td style="overflow-wrap: anywhere;">$party.name</td>
+                <td style="overflow-wrap: anywhere;">$party.gmUser.name</td>
+                <td style="overflow-wrap: anywhere;">
                     $party.getPCCharacterSheetName($party.PC1)
                     <br>
                     <i style="color: lightslategrey; font-size: small;">$party.PC1</i>
                 </td>
-                <td>
+                <td style="overflow-wrap: anywhere;">
                     $party.getPCCharacterSheetName($party.PC2)
                     <br>
                     <i style="color: lightslategrey; font-size: small;">$party.PC2</i>
                 </td>
-                <td>
+                <td style="overflow-wrap: anywhere;">
                     $party.getPCCharacterSheetName($party.PC3)
                     <br>
                     <i style="color: lightslategrey; font-size: small;">$party.PC3</i>
                 </td>
-                <td>
+                <td style="overflow-wrap: anywhere;">
                     $party.getPCCharacterSheetName($party.PC4)
                     <br>
                     <i style="color: lightslategrey; font-size: small;">$party.PC4</i>
