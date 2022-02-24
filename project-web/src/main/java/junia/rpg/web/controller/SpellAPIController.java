@@ -8,9 +8,7 @@ import org.springframework.http.MediaType;
 
 import javax.inject.Named;
 import javax.ws.rs.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Named
@@ -68,6 +66,7 @@ public class SpellAPIController implements RestController {
     @Path("/{name}=name/{limit}=limit")
     public List<SpellDTO> getSpellsByNameWithLimit(@PathParam("name") String name, @PathParam("limit") int limit) {
         List<SpellDTO> spells = getSpellsByName(name);
+        Collections.shuffle(spells);
         spells.subList(limit, spells.size()).clear();
         return spells;
     }
@@ -76,6 +75,7 @@ public class SpellAPIController implements RestController {
     @Path("/{type}=type/{limit}=limit")
     public List<SpellDTO> getSpellsByTypeWithLimit(@PathParam("type") String type, @PathParam("limit") int limit) {
         List<SpellDTO> spells = getSpellsByType(type);
+        Collections.shuffle(spells);
         spells.subList(limit, spells.size()).clear();
         return spells;
     }
@@ -84,6 +84,7 @@ public class SpellAPIController implements RestController {
     @Path("/{level}=level/{limit}=limit")
     public List<SpellDTO> getSpellsByLevelWithLimit(@PathParam("level") int level, @PathParam("limit") int limit) {
         List<SpellDTO> spells = getSpellsByLevel(level);
+        Collections.shuffle(spells);
         spells.subList(limit, spells.size()).clear();
         return spells;
     }
