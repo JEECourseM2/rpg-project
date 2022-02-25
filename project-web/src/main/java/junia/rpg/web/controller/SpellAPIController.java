@@ -25,8 +25,8 @@ public class SpellAPIController implements RestController {
 
     @GET
     @Path("/")
-    public Map<Long, String> getAllSpells() {
-        return spellService.findAll().stream().collect(Collectors.toMap(Spell::getId, Spell::getName));
+    public List<String> getAllSpells() {
+        return spellService.findAll().stream().map(Spell::getName).collect(Collectors.toList());
     }
 
     @GET
