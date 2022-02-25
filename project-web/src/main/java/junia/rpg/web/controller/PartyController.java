@@ -1,12 +1,13 @@
 package junia.rpg.web.controller;
 
-import junia.rpg.core.entity.CharacterSheet;
 import junia.rpg.core.entity.Party;
 import junia.rpg.core.entity.User;
 import junia.rpg.core.service.PartyService;
 import junia.rpg.core.service.UserService;
 import junia.rpg.web.dto.PartyDTO;
 import junia.rpg.web.utils.MappingUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ import java.util.List;
 @RequestMapping("/web")
 public class PartyController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PartyController.class);
+
     private PartyService partyService;
     private UserService userService;
 
@@ -32,6 +35,7 @@ public class PartyController {
 
     @GetMapping(value = "/userParties")
     public String getUserPartiesList(HttpSession httpSession, ModelMap model) {
+        LOGGER.info("Listing all parties (as game master and player)");
         User user = (User) httpSession.getAttribute("user");
         List<Party> parties = partyService.findPartiesById(user.getId());
         parties.addAll(partyService.findPartiesByGmUserId(user.getId()));
@@ -49,6 +53,7 @@ public class PartyController {
 
     @GetMapping(path = "/createParty")
     public String createParty(HttpSession httpSession, ModelMap model) {
+        LOGGER.info("Displaying form for creation of a party");
         User user = (User) httpSession.getAttribute("user");
         model.addAttribute("currentUser", user);
 
@@ -67,6 +72,7 @@ public class PartyController {
         User user = (User) httpSession.getAttribute("user");
         // Double check on name
         if( null == party || null == party.getName() || party.getName().isEmpty()) {
+            LOGGER.info("Redirect to party creation for missing name");
             return "redirect:createParty";
         }
 
@@ -74,6 +80,7 @@ public class PartyController {
         List<String> pcUsernames = new ArrayList<String>(Arrays.asList(usernamePC1, usernamePC2, usernamePC3, usernamePC4));
         pcUsernames.removeIf(u -> u.equals("")); // remove null values
         if(pcUsernames.contains(user.getName()) || (pcUsernames.size() != 1 && pcUsernames.stream().distinct().count() <= 1)) {
+            LOGGER.info("Displaying party creation form with error message for doubles in PC list");
             List<User> allUsers = userService.findAll();
             allUsers.remove(user);
             model.addAttribute("currentUser", user);
@@ -82,6 +89,7 @@ public class PartyController {
             return "createParty";
         }
 
+        LOGGER.info("Creation of new party");
         // Save created party
         party.setGmUser(user);
 
@@ -92,6 +100,7 @@ public class PartyController {
         party.setPC4(usernamePC4);
         partyService.save(party);
 
+        LOGGER.info("Redirect to parties list");
         return "redirect:userParties";
     }
 
@@ -99,6 +108,7 @@ public class PartyController {
     public String getEditParty(HttpSession httpSession,
                                @PathVariable("id") long id,
                                ModelMap model) {
+        LOGGER.info("Displaying form for edition of party with id:"+Long.toString(id));
         User user = (User) httpSession.getAttribute("user");
         model.addAttribute("currentUser", user);
 
@@ -121,6 +131,7 @@ public class PartyController {
                               @ModelAttribute("selectPC3") String usernamePC3, @ModelAttribute("selectPC4") String usernamePC4) {
         // Double check on name
         if( null == party || null == party.getName() || party.getName().isEmpty()) {
+            LOGGER.info("Redirect to party edition (id:"+Long.toString(id)+") for missing name");
             return "redirect:editParty";
         }
 
@@ -129,6 +140,7 @@ public class PartyController {
         List<String> pcUsernames = new ArrayList<String>(Arrays.asList(usernamePC1, usernamePC2, usernamePC3, usernamePC4));
         pcUsernames.removeIf(u -> u.equals("")); // remove null values
         if(pcUsernames.contains(user.getName()) || (pcUsernames.size() != 1 && pcUsernames.stream().distinct().count() <= 1)) {
+            LOGGER.info("Displaying party edition (id:"+Long.toString(id)+") form with error message for doubles in PC list");
             List<User> allUsers = userService.findAll();
             allUsers.remove(user);
             Party partyFromId = partyService.findById(id);
@@ -139,6 +151,7 @@ public class PartyController {
             return "editParty";
         }
 
+        LOGGER.info("Edition of party with id:"+Long.toString(id));
         // Update party values
         Party bddParty = partyService.findById(id);
         bddParty.setName(party.getName());
@@ -151,14 +164,17 @@ public class PartyController {
         // Save in database
         partyService.save(bddParty);
 
+        LOGGER.info("Redirect to parties list");
         return "redirect:../userParties";
     }
 
     @PostMapping(path = "/{id}/doDeleteParty")
     public String doDeleteParty(HttpSession httpSession, @PathVariable("id") long id) {
+        LOGGER.info("Deletion of party with id:"+Long.toString(id));
         User user = (User) httpSession.getAttribute("user");
         partyService.deleteById(id);
         httpSession.setAttribute("user", userService.updateUser(user.getId()));
+        LOGGER.info("Redirect to parties list");
         return "redirect:../userParties";
     }
 

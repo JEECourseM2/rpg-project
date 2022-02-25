@@ -1,10 +1,11 @@
 package junia.rpg.web.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,12 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 class ErrorController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorController.class);
+
     @ExceptionHandler(value = Exception.class)
     public String
     defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null){
             throw e;
         }
+        LOGGER.info("Redirect to login page");
         return "redirect:/web/login";
     }
 }

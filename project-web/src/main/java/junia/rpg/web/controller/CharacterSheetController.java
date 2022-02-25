@@ -6,6 +6,8 @@ import junia.rpg.core.entity.User;
 import junia.rpg.core.service.CharacterSheetService;
 import junia.rpg.core.service.PartyService;
 import junia.rpg.core.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/web")
 public class CharacterSheetController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CharacterSheetController.class);
 
     private CharacterSheetService characterSheetService;
     private PartyService partyService;
@@ -37,15 +41,16 @@ public class CharacterSheetController {
 
     @GetMapping(path = "/userCharacters")
     public String getUserCharactersList(HttpSession httpSession, ModelMap model) {
+        LOGGER.info("Listing all the characters");
         User user = (User) httpSession.getAttribute("user");
         model.addAttribute("currentUser", user);
         model.addAttribute("userCharacterSheets", user.getCharacterSheets());
-
         return "charactersList";
     }
 
     @GetMapping(path = "/createCharacter")
     public String getCreateCharacterSheetForm(HttpSession httpSession, ModelMap model) {
+        LOGGER.info("Displaying form for character creation");
         User user = (User) httpSession.getAttribute("user");
         model.addAttribute("currentUser", user);
         model.addAttribute("charParties", getUserCharacterSheetLessPartiesAsPC(user, model));
@@ -58,14 +63,17 @@ public class CharacterSheetController {
                                          @ModelAttribute("selectParty") String partyId) {
         // double check on name
         if( null == characterSheet || null == characterSheet.getName() || characterSheet.getName().isEmpty()) {
+            LOGGER.info("Redirect to character creation for missing name");
             return "redirect:createCharacter";
         }
 
+        LOGGER.info("Creation of new character");
         User user = (User) httpSession.getAttribute("user");
         characterSheet.setUser(user);
         if (!partyId.isEmpty()) characterSheet.setParty(partyService.findById(Long.parseLong(partyId)));
         characterSheetService.save(characterSheet);
         httpSession.setAttribute("user", userService.updateUser(user.getId()));
+        LOGGER.info("Redirect to characters list");
         return "redirect:userCharacters";
     }
 
@@ -73,6 +81,7 @@ public class CharacterSheetController {
     public String getEditCharacterSheetForm(HttpSession httpSession,
                                             @PathVariable("id") long id,
                                             ModelMap model) {
+        LOGGER.info("Displaying form for edition of character");
         User user = (User) httpSession.getAttribute("user");
 
         model.addAttribute("currentUser", user);
@@ -90,8 +99,10 @@ public class CharacterSheetController {
 
         // double check on name
         if(characterSheet == null || characterSheet.getName() == null || characterSheet.getName() == "") {
+            LOGGER.info("Redirect to character (id:"+Long.toString(id)+") edition for missing name");
             return "redirect:editCharacter";
         }
+        LOGGER.info("Edition of character with id:"+Long.toString(id));
         CharacterSheet bddCharacterSheet = characterSheetService.findById(id);
         // update all fields
         bddCharacterSheet.setName(characterSheet.getName());
@@ -113,14 +124,17 @@ public class CharacterSheetController {
         // update in bdd
         characterSheetService.save(bddCharacterSheet);
         httpSession.setAttribute("user", userService.updateUser(user.getId()));
+        LOGGER.info("Redirect to characters list");
         return "redirect:../userCharacters";
     }
 
     @PostMapping(path = "/{id}/doDeleteCharacter")
     public String doDeleteCharacter(HttpSession httpSession, @PathVariable("id") long id) {
+        LOGGER.info("Deletion of charater with id:"+Long.toString(id));
         User user = (User) httpSession.getAttribute("user");
         characterSheetService.deleteById(id);
         httpSession.setAttribute("user", userService.updateUser(user.getId()));
+        LOGGER.info("Redirect to characters list");
         return "redirect:../userCharacters";
     }
 
