@@ -36,13 +36,13 @@ Also available as a swagger `.yaml` file in the `resources` folder.
 
 > Gets all the spells 
 > 
-> Returns a map with spell id and name
+> Returns a list of spell names
 > ```
-> {
+> [
 >     "id": "spell_name",
 >     "id": "spell_name",
 >     ...
-> }
+> ]
 > ```
 
 **GET** `/spells/{name}=name` 
@@ -51,23 +51,21 @@ Also available as a swagger `.yaml` file in the `resources` folder.
 > 
 > Returns a list of spells
 > ```
-> {
->     [
->         {
->             name: string
->             type: string
->             level: integer
->             description: string
->         },
->         {
->             name: string
->             type: string
->             level: integer
->             description: string
->         },
->         ...
->     ]
-> }
+> [
+>     {
+>         name: string
+>         type: string
+>         level: integer
+>         description: string
+>     },
+>     {
+>         name: string
+>         type: string
+>         level: integer
+>         description: string
+>     },
+>     ...
+> ]
 > ```
 
 **GET** `/spells/{type}=type` 
@@ -87,23 +85,21 @@ Also available as a swagger `.yaml` file in the `resources` folder.
 > 
 > Returns a list of spells
 > ```
-> {
->     [
->         {
->             name: string
->             type: string
->             level: integer
->             description: string
->         },
->         {
->             name: string
->             type: string
->             level: integer
->             description: string
->         },
->         ...
->     ]
-> }
+> [
+>     {
+>         name: string
+>         type: string
+>         level: integer
+>         description: string
+>     },
+>     {
+>         name: string
+>         type: string
+>         level: integer
+>         description: string
+>     },
+>     ...
+> ] 
 > ```
 
 **GET** `/spells/{level}=level` 
@@ -112,23 +108,21 @@ Also available as a swagger `.yaml` file in the `resources` folder.
 > 
 > Returns a list of spells
 > ```
-> {
->     [
->         {
->             name: string
->             type: string
->             level: integer
->             description: string
->         },
->         {
->             name: string
->             type: string
->             level: integer
->             description: string
->         },
->         ...
->     ]
-> }
+> [
+>     {
+>         name: string
+>         type: string
+>         level: integer
+>         description: string
+>     },
+>     {
+>         name: string
+>         type: string
+>         level: integer
+>         description: string
+>     },
+>     ...
+> ]
 > ```
 
 ### These three routes can be refined with the suffix route `/{limit}=limit`
