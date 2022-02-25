@@ -19,7 +19,6 @@ import java.util.List;
 @ImportResource({"classpath:META-INF/cxf/cxf.xml"})
 public class WSConfig {
 
-
     @Bean
     public Server jaxrsServer(JacksonJsonProvider jsonProvider,Bus cxfBus,List<RestController> controllers){
         JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
