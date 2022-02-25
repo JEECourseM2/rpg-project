@@ -1,0 +1,203 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "JEE Project - RPG Manager"
+basePath: "/project_web_war_exploded/api"
+tags:
+- name: "spells"
+  description: "Everything about spells"
+  
+schemes:
+- "http"
+paths:
+  /spells:
+    get:
+      tags:
+      - "spells"
+      summary: "Get all spell names"
+      responses: 
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              type: "string"
+            example: ["Sleep","Charm Person","Burning Hands"]
+ 
+  /spells/{name}=name:
+    get:
+      tags:
+      - "spells"
+      summary: "Search spells by name"
+      description: ""
+      operationId: "getSpellsByName"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "name"
+        description: "Name of the spell"
+        required: true
+        type: "string"
+        
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Spell"
+              
+  /spells/{type}=type:
+    get:
+      tags:
+      - "spells"
+      summary: "Search spells by type"
+      description: ""
+      operationId: "getSpellsByType"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "type"
+        description: "Type of the spell"
+        required: true
+        type: "string"
+        
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Spell"     
+  
+  /spells/{level}=level:
+    get:
+      tags:
+      - "spells"
+      summary: "Search spells by level"
+      description: ""
+      operationId: "getSpellsByLevel"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "level"
+        description: "Level of the spell"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Spell"
+
+ 
+  /spells/{name}=name/{limit}=limit:
+    get:
+      tags:
+      - "spells"
+      summary: "Search a given number of spells by name"
+      description: ""
+      operationId: "getSpellsByNameWithLimit"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "name"
+        description: "Name of the spell"
+        required: true
+        type: "string"
+      - in: "path"
+        name: "limit"
+        description: "Number of spells"
+        required: true
+        type: "integer"
+        
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Spell"
+              
+  /spells/{type}=type/{limit}=limit:
+    get:
+      tags:
+      - "spells"
+      summary: "Search a given number of spells by type"
+      description: ""
+      operationId: "getSpellsByTypeWithLimit"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "type"
+        description: "Type of the spell"
+        required: true
+        type: "string"
+      - in: "path"
+        name: "limit"
+        description: "Number of spells"
+        required: true
+        type: "integer"
+        
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Spell"     
+  
+  /spells/{level}=level/{limit}=limit:
+    get:
+      tags:
+      - "spells"
+      summary: "Search a given number of spells by level"
+      description: ""
+      operationId: "getSpellsByLevelWithLimit"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "level"
+        description: "Level of the spell"
+        required: true
+        type: "string"
+      - in: "path"
+        name: "limit"
+        description: "Number of spells"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Spell"  
+  
+  
+definitions:
+  Spell:
+    type: "object"
+    properties:
+      name: 
+        type: "string"
+      type:
+        type: "string"
+      level:
+        type: "integer"
+      description: 
+        type: "string"
+    example:
+      name: "Twilight Haze"
+      type: "Illusion"
+      level: "2"
+      description: "Illusory fog obscures vision."
+    

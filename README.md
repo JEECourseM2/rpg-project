@@ -24,6 +24,8 @@ A simple tabletop roleplaying manager made in JEE with Spring and Velocity.
 ---
 ## API documentation
 
+Also available as a swagger `.yaml` file in the `resources` folder.
+
 ### Base URL : `localhost:8080/project_web_war_exploded/api`
 
 **GET** `/spells` 
@@ -67,6 +69,17 @@ A simple tabletop roleplaying manager made in JEE with Spring and Velocity.
 **GET** `/spells/{type}=type` 
 
 > Gets all the spells which are of type: `{type}`
+>
+> The types present in the provided SQL dump are : 
+> - Abjuration
+> - Conjuration
+> - Divination
+> - Enchantment
+> - Evocation
+> - Illusion
+> - Necromancy
+> - Transmutation
+> - Universal
 > 
 > Returns a list of spells
 > ```
