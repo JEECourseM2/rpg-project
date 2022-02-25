@@ -11,6 +11,10 @@ A simple tabletop roleplaying manager made in JEE with Spring and Velocity.
   - by level
   - by name 
 
+Creating a party automatically sets you as the GM.
+
+The members chosen on the party creation form will then be able to assign the party to one of their characters.
+
 ## Requirements
 - JDK 11
 - MySQL server
