@@ -20,6 +20,10 @@ public class UserService{
         userDAO.deleteAll();
     }
 
+    public void delete(User user) { userDAO.delete(user); }
+
+    public void deleteById(Long id) { userDAO.deleteById(id); }
+
     public void save(User user){
         userDAO.save(user);
     }

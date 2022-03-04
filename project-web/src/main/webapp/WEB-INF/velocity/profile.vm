@@ -71,6 +71,11 @@
         </div>
     </div>
     <hr style="border-top: 1px solid #8c8b8b;">
+    <div class="col-sm text-end">
+        <form  method="post" action="/project_web_war_exploded/web/deleteUser">
+            <button type="submit" style="padding-top: -4px;padding-bottom: -4px;padding-left: 15px;padding-right: 15px;" class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+    </div>
 
     <div class="row">
         <div class="col-sm">
