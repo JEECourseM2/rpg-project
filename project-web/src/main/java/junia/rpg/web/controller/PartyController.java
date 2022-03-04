@@ -37,7 +37,7 @@ public class PartyController {
     public String getUserPartiesList(HttpSession httpSession, ModelMap model) {
         LOGGER.info("Listing all parties (as game master and player)");
         User user = (User) httpSession.getAttribute("user");
-        List<Party> parties = partyService.findPartiesById(user.getId());
+        List<Party> parties = partyService.findPartiesByPCName(user.getName());
         parties.addAll(partyService.findPartiesByGmUserId(user.getId()));
 
         List<PartyDTO> partiesDTO = new ArrayList<>();
