@@ -36,6 +36,9 @@ public interface PartyDAO extends JpaRepository<Party, Long> {
     @Query
     List<Party> findPartiesById(long userId);
 
+    @Query("SELECT DISTINCT p FROM Party p WHERE (p.PC1=:name OR p.PC2=:name OR p.PC3=:name OR p.PC4=:name) ")
+    List<Party> findPartiesByPCName(@Param("name") String username);
+
     @Query
     List<Party> findPartiesByGmUserId(long gmUserId);
 

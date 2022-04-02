@@ -46,6 +46,8 @@ public class PartyService {
         return partyDAO.findPartiesById(userId);
     }
 
+    public List<Party> findPartiesByPCName(String username) { return partyDAO.findPartiesByPCName(username); }
+
     public List<Party> findPartiesByGmUserId(long gmUserId){
         return partyDAO.findPartiesByGmUserId(gmUserId);
     }

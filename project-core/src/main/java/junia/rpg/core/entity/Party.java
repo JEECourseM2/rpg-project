@@ -36,6 +36,43 @@ public class Party extends GenericEntity{
     private User gmUser;
 
 
+    public void removeUserFromPC(String username) {
+        if (this.PC1.equals(username)) {
+            if (this.PC4 != null) {
+                this.PC1 = PC4;
+                this.PC4 = null;
+            }
+            else if (this.PC3 != null) {
+                this.PC1 = PC3;
+                this.PC3 = null;
+            }
+            else if (this.PC2 != null) {
+                this.PC1 = PC2;
+                this.PC2 = null;
+            }
+        }
+        else if (this.PC2.equals(username)) {
+            if (this.PC4 != null) {
+                this.PC2 = PC4;
+                this.PC4 = null;
+            }
+            else if (this.PC3 != null) {
+                this.PC2 = PC3;
+                this.PC3 = null;
+            }
+        }
+        else if (this.PC3.equals(username)) {
+            if (this.PC4 != null) {
+                this.PC2 = PC4;
+                this.PC4 = null;
+            }
+        }
+        else if (this.PC4.equals(username)) {
+            this.PC4 = null;
+        }
+    }
+
+
     public String getName() {
         return name;
     }
